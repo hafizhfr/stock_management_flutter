@@ -7,12 +7,12 @@ Color b = Colors.grey;
 Color c = Colors.grey;
 Color d = Colors.grey;
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
