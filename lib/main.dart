@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/widgets/history.dart';
 import 'package:stock_management_flutter/widgets/login.dart';
 
+import 'widgets/history.dart';
+
 void main() {
   runApp(MyApp());
 }
