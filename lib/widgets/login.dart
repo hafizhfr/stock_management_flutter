@@ -62,86 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Full Name",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.start,
-                          ),
-                          // SizedBox(
-                          //   height: 5,
-                          // ),
-                          TextField(
-                            controller: nameController,
-                            decoration: InputDecoration(
-                              errorText:
-                                  _validate ? 'Name can\'t be empty' : null,
-                              labelStyle: TextStyle(color: a),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: a),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: a),
-                              ),
-                            ),
-                            style: TextStyle(fontSize: 15, color: Colors.black),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Email",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.start,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.emailAddress,
-                            controller: emailController,
-                            decoration: InputDecoration(
-                              errorText:
-                                  _validate ? 'Email can\'t be empty' : null,
-                              labelStyle: TextStyle(color: a),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: a),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: a),
-                              ),
-                            ),
-                            style: TextStyle(fontSize: 15, color: Colors.black),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Password",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.start,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          TextField(
-                            controller: passwordController,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              errorText:
-                                  _validate ? 'Password can\'t be empty' : null,
-                              labelStyle: TextStyle(color: a),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: a),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: a),
-                              ),
-                            ),
-                            style: TextStyle(fontSize: 15, color: Colors.black),
-                          ),
+                          inputText(label: 'Full Name'),
+                          inputText(label: 'Email'),
+                          inputText(label: 'Password', obscureText: true),
                         ]),
                     SizedBox(
                       height: 40,
@@ -180,6 +103,37 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget inputText({label, obscureText = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.start,
+        ),
+        TextField(
+          obscureText: obscureText,
+          controller: nameController,
+          decoration: InputDecoration(
+            errorText: _validate ? '$label can\'t be empty' : null,
+            labelStyle: TextStyle(color: a),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: a),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: a),
+            ),
+          ),
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
     );
   }
 
