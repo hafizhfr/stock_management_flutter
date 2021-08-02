@@ -5,7 +5,7 @@ import 'package:stock_management_flutter/widgets/login.dart';
 void main() {
   runApp(MyApp());
 }
-
+//TEST
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
