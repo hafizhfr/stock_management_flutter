@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/widgets/dashboard_screen.dart';
 import 'package:stock_management_flutter/widgets/history.dart';
-import 'package:stock_management_flutter/widgets/login.dart';
+import 'package:stock_management_flutter/widgets/login_screen.dart';
 
 import 'widgets/history.dart';
 
@@ -43,6 +44,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return HistoryScreen();
+    return LoginScreen();
   }
 }
