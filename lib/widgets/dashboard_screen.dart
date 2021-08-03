@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/widgets/login_screen.dart';
+import 'package:stock_management_flutter/widgets/register_screen.dart';
 
 var fontFamily = 'Poppins';
 Color a = Color(0xff25C266);
@@ -8,6 +10,7 @@ Color c = Color(0xff33333F);
 Color d = Color(0xff8E8E93);
 
 class DashBoardScreen extends StatelessWidget {
+
   final String email;
   final String password;
 
@@ -54,6 +57,7 @@ class DashboardScreenMobile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Stack(
+                clipBehavior: Clip.none,
                 children: <Widget>[
                   Container(
                     width: size.width,
@@ -64,8 +68,10 @@ class DashboardScreenMobile extends StatelessWidget {
                             BorderRadius.vertical(bottom: Radius.circular(32))),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 32),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(4)),
@@ -73,7 +79,7 @@ class DashboardScreenMobile extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Text(
                               "Total Sales",
@@ -91,7 +97,11 @@ class DashboardScreenMobile extends StatelessWidget {
                             )
                           ],
                         )),
-                        Container(width: 2, height: 48, color: Colors.amber,),
+                        Container(
+                          width: 2,
+                          height: 48,
+                          color: Colors.amber,
+                        ),
                         Expanded(
                           child: Column(
                             children: <Widget>[
@@ -112,7 +122,11 @@ class DashboardScreenMobile extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Container(width: 2, height: 48, color: Colors.amber,),
+                        Container(
+                          width: 2,
+                          height: 48,
+                          color: Colors.amber,
+                        ),
                         Expanded(
                           child: Column(
                             children: <Widget>[
@@ -137,6 +151,118 @@ class DashboardScreenMobile extends StatelessWidget {
                     ),
                   )
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 32, bottom: 16, left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Quick Actions",
+                      textAlign: TextAlign.left,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          child: Card(
+                              color: Colors.amberAccent,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 20),
+                                alignment: Alignment.center,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.add_circle_outline_outlined,
+                                          size: 64,
+                                          color: Colors.black,
+                                        ),
+                                        iconSize: 64,
+                                        alignment: Alignment.center,
+                                        onPressed: () {}),
+                                    Text(
+                                      "Add Item",
+                                      style: TextStyle(fontSize: 16),
+                                    )
+                                  ],
+                                ),
+                              )),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: Card(
+                              color: Colors.blueAccent,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 20),
+                                alignment: Alignment.center,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.shopping_cart,
+                                          size: 64,
+                                          color: Colors.black,
+                                        ),
+                                        iconSize: 64,
+                                        alignment: Alignment.center,
+                                        onPressed: () {}),
+                                    Text(
+                                      "Add Item",
+                                      style: TextStyle(fontSize: 16),
+                                    )
+                                  ],
+                                ),
+                              )),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: Card(
+                              color: Colors.redAccent,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 20),
+                                alignment: Alignment.center,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.warning,
+                                          size: 64,
+                                          color: Colors.black,
+                                        ),
+                                        iconSize: 64,
+                                        alignment: Alignment.center,
+                                        onPressed: () {}),
+                                    Text(
+                                      "Add Item",
+                                      style: TextStyle(fontSize: 16),
+                                    )
+                                  ],
+                                ),
+                              )),
+                          flex: 1,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               )
             ],
           ),

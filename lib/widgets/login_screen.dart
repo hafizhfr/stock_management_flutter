@@ -32,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Flexible(
+                  flex: 2,
                     child: Container(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -46,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 16,
                 ),
                 Flexible(
+                  fit: FlexFit.tight,
                     flex: 3,
                     child: Container(
                       width: 250,
