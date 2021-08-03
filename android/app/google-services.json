@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1023320716561",
+    "project_id": "stock-management-flutter",
+    "storage_bucket": "stock-management-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023320716561:android:863eaa47289c67482548b0",
+        "android_client_info": {
+          "package_name": "com.example.stock_management_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023320716561-o67du2ll0vqe9c8v8scanrvq40qftfml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8HNqxqm2_Ebc4zw5s9WGtEVZ59xHdWzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023320716561-o67du2ll0vqe9c8v8scanrvq40qftfml.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

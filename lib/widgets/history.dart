@@ -6,6 +6,8 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
+  final items = List<String>.generate(10, (i) => "Item $i");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,70 +19,18 @@ class _HistoryScreenState extends State<HistoryScreen> {
           padding: EdgeInsets.symmetric(horizontal: 40),
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      title: Text('User menambah Barang_1'),
-                      subtitle: Text('28 Juli 2021 15:15'),
-                    ),
-                  ],
+          child: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return Container(
+                child: Card(
+                  child: ListTile(
+                    title: Text(items[index]),
+                    subtitle: Text('28 Juli 2021 15:15'),
+                  ),
                 ),
-              ),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      title: Text('User menambah Barang_1'),
-                      subtitle: Text('28 Juli 2021 15:15'),
-                    ),
-                  ],
-                ),
-              ),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      title: Text('User menambah Barang_1'),
-                      subtitle: Text('28 Juli 2021 15:15'),
-                    ),
-                  ],
-                ),
-              ),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      title: Text('User menambah Barang_1'),
-                      subtitle: Text('28 Juli 2021 15:15'),
-                    ),
-                  ],
-                ),
-              ),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      title: Text('User menambah Barang_1'),
-                      subtitle: Text('28 Juli 2021 15:15'),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
