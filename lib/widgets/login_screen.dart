@@ -34,20 +34,22 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Flexible(
+                flex: 2,
                 child: Container(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Let’s Get\nStarted",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Let’s Get\nStarted",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )),
             SizedBox(
               height: 16,
             ),
             Flexible(
+                fit: FlexFit.tight,
                 flex: 3,
                 child: Container(
                   width: 250,

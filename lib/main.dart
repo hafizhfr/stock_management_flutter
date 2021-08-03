@@ -35,8 +35,52 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int currentIndex = 0;
+  final screens = [DashBoardScreen(), HistoryScreen(), LoginScreen()];
   @override
   Widget build(BuildContext context) {
-    return RegisterScreen();
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        fixedColor: Colors.amber,
+        currentIndex: 0,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.home,
+                size: 36,
+                color: Colors.amber,
+              ),
+              label: "Home"),
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.history,
+                size: 36,
+                color: Colors.amber,
+              ),
+              label: "History"),
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.account_circle_rounded,
+                size: 36,
+                color: Colors.amber,
+              ),
+              label: "Profile")
+        ],
+        onTap: onTabTapped,
+      ),
+      body: IndexedStack(
+        index: currentIndex,
+        children: screens,
+      ),
+    );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
   }
 }
