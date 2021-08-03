@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/widgets/dashboard_screen.dart';
 import 'package:stock_management_flutter/widgets/history.dart';
+import 'package:stock_management_flutter/widgets/login_screen.dart';
 import 'package:stock_management_flutter/widgets/register_screen.dart';
 
 void main() {
   runApp(MyApp());
 }
-
+//TEST
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -41,6 +43,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return HistoryScreen();
+    return LoginScreen();
   }
 }
