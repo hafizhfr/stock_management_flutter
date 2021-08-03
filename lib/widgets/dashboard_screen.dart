@@ -10,7 +10,6 @@ Color c = Color(0xff33333F);
 Color d = Color(0xff8E8E93);
 
 class DashBoardScreen extends StatelessWidget {
-
   final String email;
   final String password;
 
@@ -260,6 +259,79 @@ class DashboardScreenMobile extends StatelessWidget {
                           flex: 1,
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "Products",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "View All",
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.right,
+                            ))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Scrollbar(
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: ScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          Card(
+                            elevation: 1.5,
+                              color: Colors.white,
+                              child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 16, horizontal: 16),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex:1,
+                                          child: Image.asset(
+                                        'images/signup_illustration.jpg',
+                                        height: 48,
+                                        width: 48,
+                                      )),
+                                      SizedBox(width: 8,),
+                                      Expanded(
+                                        flex: 4,
+                                          child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            "Product Name",
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                          Text(
+                                            "Price",
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                          Text(
+                                            "Stock",
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ],
+                                      ))
+                                    ],
+                                  )))
+                        ],
+                      ),
                     )
                   ],
                 ),
