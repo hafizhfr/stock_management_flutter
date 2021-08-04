@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/widgets/add_item_screen.dart';
 import 'package:stock_management_flutter/widgets/login_screen.dart';
 import 'package:stock_management_flutter/widgets/register_screen.dart';
 
@@ -190,7 +191,13 @@ class DashboardScreenMobile extends StatelessWidget {
                                         ),
                                         iconSize: 64,
                                         alignment: Alignment.center,
-                                        onPressed: () {}),
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return AddItemScreen();
+                                          }));
+                                        }),
                                     Text(
                                       "Add Item",
                                       style: TextStyle(fontSize: 16),
@@ -290,7 +297,7 @@ class DashboardScreenMobile extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         children: [
                           Card(
-                            elevation: 1.5,
+                              elevation: 1.5,
                               color: Colors.white,
                               child: Container(
                                   padding: EdgeInsets.symmetric(
@@ -298,36 +305,38 @@ class DashboardScreenMobile extends StatelessWidget {
                                   child: Row(
                                     children: <Widget>[
                                       Expanded(
-                                        flex:1,
+                                          flex: 1,
                                           child: Image.asset(
-                                        'images/signup_illustration.jpg',
-                                        height: 48,
-                                        width: 48,
-                                      )),
-                                      SizedBox(width: 8,),
+                                            'images/signup_illustration.jpg',
+                                            height: 48,
+                                            width: 48,
+                                          )),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
                                       Expanded(
-                                        flex: 4,
+                                          flex: 4,
                                           child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            "Product Name",
-                                            style: TextStyle(fontSize: 14),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          Text(
-                                            "Price",
-                                            style: TextStyle(fontSize: 14),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          Text(
-                                            "Stock",
-                                            style: TextStyle(fontSize: 14),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                        ],
-                                      ))
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(
+                                                "Product Name",
+                                                style: TextStyle(fontSize: 14),
+                                                textAlign: TextAlign.start,
+                                              ),
+                                              Text(
+                                                "Price",
+                                                style: TextStyle(fontSize: 14),
+                                                textAlign: TextAlign.start,
+                                              ),
+                                              Text(
+                                                "Stock",
+                                                style: TextStyle(fontSize: 14),
+                                                textAlign: TextAlign.start,
+                                              ),
+                                            ],
+                                          ))
                                     ],
                                   )))
                         ],
