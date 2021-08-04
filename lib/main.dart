@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_management_flutter/widgets/dashboard_screen.dart';
-import 'package:stock_management_flutter/widgets/history.dart';
-import 'package:stock_management_flutter/widgets/login_screen.dart';
-import 'package:stock_management_flutter/widgets/register_screen.dart';
+import 'package:stock_management_flutter/page/dashboard_screen.dart';
+import 'package:stock_management_flutter/page/history.dart';
+import 'package:stock_management_flutter/page/login_screen.dart';
+import 'package:stock_management_flutter/page/register_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
-  final screens = [DashBoardScreen(), HistoryScreen(), LoginScreen()];
+  final screens = [DashBoardScreen(), HistoryScreen(), RegisterScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,25 +46,23 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: 0,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        iconSize: 36,
         items: [
           BottomNavigationBarItem(
               icon: new Icon(
                 Icons.home,
-                size: 36,
                 color: Colors.amber,
               ),
               label: "Home"),
           BottomNavigationBarItem(
               icon: new Icon(
                 Icons.history,
-                size: 36,
                 color: Colors.amber,
               ),
               label: "History"),
           BottomNavigationBarItem(
               icon: new Icon(
                 Icons.account_circle_rounded,
-                size: 36,
                 color: Colors.amber,
               ),
               label: "Profile")

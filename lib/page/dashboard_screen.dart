@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_management_flutter/widgets/login_screen.dart';
-import 'package:stock_management_flutter/widgets/register_screen.dart';
+import 'package:stock_management_flutter/page/add_item_screen.dart';
+import 'package:stock_management_flutter/page/all_item_screen.dart';
+import 'package:stock_management_flutter/page/login_screen.dart';
+import 'package:stock_management_flutter/page/register_screen.dart';
+import 'package:stock_management_flutter/widgets/card_product_widget.dart';
 
 var fontFamily = 'Poppins';
 Color a = Color(0xff25C266);
@@ -190,7 +193,13 @@ class DashboardScreenMobile extends StatelessWidget {
                                         ),
                                         iconSize: 64,
                                         alignment: Alignment.center,
-                                        onPressed: () {}),
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return AddItemScreen();
+                                          }));
+                                        }),
                                     Text(
                                       "Add Item",
                                       style: TextStyle(fontSize: 16),
@@ -221,7 +230,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                         alignment: Alignment.center,
                                         onPressed: () {}),
                                     Text(
-                                      "Add Item",
+                                      "Sell",
                                       style: TextStyle(fontSize: 16),
                                     )
                                   ],
@@ -250,7 +259,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                         alignment: Alignment.center,
                                         onPressed: () {}),
                                     Text(
-                                      "Add Item",
+                                      "Low Stock",
                                       style: TextStyle(fontSize: 16),
                                     )
                                   ],
@@ -272,7 +281,11 @@ class DashboardScreenMobile extends StatelessWidget {
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return AllItemScreen();
+                              }));
+                            },
                             child: Text(
                               "View All",
                               style: TextStyle(fontSize: 18),
@@ -289,47 +302,7 @@ class DashboardScreenMobile extends StatelessWidget {
                         physics: ScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         children: [
-                          Card(
-                            elevation: 1.5,
-                              color: Colors.white,
-                              child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 16, horizontal: 16),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        flex:1,
-                                          child: Image.asset(
-                                        'images/signup_illustration.jpg',
-                                        height: 48,
-                                        width: 48,
-                                      )),
-                                      SizedBox(width: 8,),
-                                      Expanded(
-                                        flex: 4,
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            "Product Name",
-                                            style: TextStyle(fontSize: 14),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          Text(
-                                            "Price",
-                                            style: TextStyle(fontSize: 14),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          Text(
-                                            "Stock",
-                                            style: TextStyle(fontSize: 14),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                        ],
-                                      ))
-                                    ],
-                                  )))
+                          productCard()
                         ],
                       ),
                     )
@@ -342,4 +315,5 @@ class DashboardScreenMobile extends StatelessWidget {
       ),
     );
   }
+  Widget productCard() => ProductCardWidget();
 }
