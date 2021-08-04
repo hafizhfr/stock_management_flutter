@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_management_flutter/auth_services.dart';
-import 'package:stock_management_flutter/widgets/dashboard_screen.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/page/dashboard_screen.dart';
+import 'package:stock_management_flutter/page/register_screen.dart';
 
 var fontFamily = 'Poppins';
 Color a = Color(0xff25C266);
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: passwordController,
               decoration: InputDecoration(
                 hintText: 'password',
-                errorText: _validate ? 'Name Can\'t Be Empty' : null,
+                errorText: _validate ? 'Password Can\'t Be Empty' : null,
                 labelStyle: TextStyle(color: a),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: a),
@@ -171,6 +172,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     }
                   }
+                },
+              ),
+            )),
+            Flexible(
+                child: Container(
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: TextStyle(fontSize: 15),
+                ),
+                child: Text("Create An Account"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return RegisterScreen();
+                  }));
                 },
               ),
             ))

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:stock_management_flutter/auth_services.dart';
-import 'package:stock_management_flutter/widgets/history.dart';
-import 'package:stock_management_flutter/widgets/login_screen.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/page/history.dart';
+import 'package:stock_management_flutter/page/login_screen.dart';
 
 var fontFamily = 'Poppins';
 Color a = Colors.grey;

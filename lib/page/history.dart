@@ -16,7 +16,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: ListView.builder(

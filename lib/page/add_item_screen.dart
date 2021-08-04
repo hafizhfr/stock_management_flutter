@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stock_management_flutter/widgets/dashboard_screen.dart';
+import 'package:stock_management_flutter/page/dashboard_screen.dart';
+import 'package:stock_management_flutter/widgets/dropdown_widget.dart';
 
 class AddItemScreen extends StatefulWidget {
   @override
@@ -12,7 +13,6 @@ class AddItemScreen extends StatefulWidget {
 
 class _AddItemScreen extends State<AddItemScreen> {
   File _image;
-  String _dropDownValue = "Makanan";
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
@@ -24,6 +24,9 @@ class _AddItemScreen extends State<AddItemScreen> {
     final double itemWidth = size.width;
 
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Add New Item"),
+        ),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -31,7 +34,7 @@ class _AddItemScreen extends State<AddItemScreen> {
             padding: const EdgeInsets.all(32),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Flexible(
                   flex: 3,
@@ -72,61 +75,7 @@ class _AddItemScreen extends State<AddItemScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                Flexible(
-                    child: Container(
-                  child: InputDecorator(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
-                      contentPadding: EdgeInsets.all(10),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: _dropDownValue,
-                        isDense: true,
-                        isExpanded: true,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("Makanan"),
-                            value: "Makanan",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Alat Tulis"),
-                            value: "Alat Tulis",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Pakaian"),
-                            value: "Pakaian",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Minuman"),
-                            value: "Minuman",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Obat-obatan"),
-                            value: "Obat-obatan",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Peralatan Mandi"),
-                            value: "Peralatan Mandi",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Keperluan Bayi"),
-                            value: "Keperluan Bayi",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Lain-lain"),
-                            value: "Dan lain-lain",
-                          )
-                        ],
-                        onChanged: (newValue) {
-                          _dropDownValue = newValue;
-                          setState(() {
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                )),
+                Flexible(child: dropDown()),
                 SizedBox(
                   height: 8,
                 ),
@@ -205,4 +154,6 @@ class _AddItemScreen extends State<AddItemScreen> {
     itemPriceController.dispose();
     super.dispose();
   }
+
+  Widget dropDown() => DropDownWidget();
 }
