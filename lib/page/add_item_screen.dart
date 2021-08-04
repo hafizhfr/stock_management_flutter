@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,10 +17,18 @@ class _AddItemScreen extends State<AddItemScreen> {
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
+
+  ItemCategoryController controller = ItemCategoryController(itemCategory: '');
+
+  String kategori = '';
+
   bool _validate = false;
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference itemCollection = firestore.collection('items');
+
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width;
 
@@ -68,6 +77,7 @@ class _AddItemScreen extends State<AddItemScreen> {
                 ),
                 Flexible(
                     child: TextField(
+                  keyboardType: TextInputType.number,
                   controller: itemCountController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), labelText: "Jumlah Item"),
@@ -75,7 +85,10 @@ class _AddItemScreen extends State<AddItemScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                Flexible(child: dropDown()),
+                Flexible(
+                    child: DropDownWidget(
+                  controller,
+                )),
                 SizedBox(
                   height: 8,
                 ),
@@ -84,6 +97,7 @@ class _AddItemScreen extends State<AddItemScreen> {
                 ),
                 Flexible(
                     child: TextField(
+                  keyboardType: TextInputType.number,
                   controller: itemPriceController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -132,11 +146,27 @@ class _AddItemScreen extends State<AddItemScreen> {
                           _validate = true;
                         });
                       } else {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          _validate = false;
-                          return DashBoardScreen();
-                        }));
+                        itemCollection.add({
+                          'namaBarang': itemNameController.text,
+                          'jumlahBarang':
+                              int.tryParse(itemCountController.text),
+                          'hargaBarang': int.tryParse(itemPriceController.text),
+                          'kategori': controller.itemCategory,
+                        });
+
+                        itemNameController.text = '';
+                        itemCountController.text = '';
+                        itemPriceController.text = '';
+                        Fluttertoast.showToast(
+                            msg: 'Berhasil menambahkan barang baru',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.TOP,
+                            fontSize: 16.0);
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) {
+                        //   _validate = false;
+                        //   return DashBoardScreen();
+                        // }));
                       }
                     },
                   ),
@@ -155,5 +185,5 @@ class _AddItemScreen extends State<AddItemScreen> {
     super.dispose();
   }
 
-  Widget dropDown() => DropDownWidget();
+  Widget dropDown() => DropDownWidget(controller);
 }

@@ -282,7 +282,8 @@ class DashboardScreenMobile extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
                                 return AllItemScreen();
                               }));
                             },
@@ -301,9 +302,7 @@ class DashboardScreenMobile extends StatelessWidget {
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
                         scrollDirection: Axis.vertical,
-                        children: [
-                          productCard()
-                        ],
+                        children: [productCard()],
                       ),
                     )
                   ],
@@ -315,5 +314,6 @@ class DashboardScreenMobile extends StatelessWidget {
       ),
     );
   }
+
   Widget productCard() => ProductCardWidget();
 }

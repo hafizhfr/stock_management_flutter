@@ -13,6 +13,8 @@ class _AllItemScreen extends State<AllItemScreen> {
   final items = List<String>.generate(10, (i) => "Item $i");
   final searchController = TextEditingController();
 
+  ItemCategoryController controller = ItemCategoryController(itemCategory: '');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,48 +26,44 @@ class _AllItemScreen extends State<AllItemScreen> {
         child: Icon(Icons.add),
         backgroundColor: Colors.redAccent,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(
-                  builder: (context) {
-                    return AddItemScreen();
-                  }));
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return AddItemScreen();
+          }));
         },
       ),
       body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Row(
-              children: <Widget>[
-                Expanded(
-                    child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.search, color: Colors.black),
-                  ),
-                )),
-                Expanded(
-                    child: dropDown()),
-              ],
+            children: <Widget>[
+              Expanded(
+                  child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.search, color: Colors.black),
+                ),
+              )),
+              Expanded(child: dropDown()),
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.all(16),
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
+            child: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return productCard();
+              },
             ),
-            Container(
-              padding: EdgeInsets.all(16),
-              height: MediaQuery.of(context).size.height,
-              width: double.infinity,
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return productCard();
-                },
-              ),
-            ),
+          ),
         ],
       )),
     );
   }
-  Widget dropDown() => DropDownWidget();
+
+  Widget dropDown() => DropDownWidget(controller);
   Widget productCard() => ProductCardWidget();
-
 }
-
