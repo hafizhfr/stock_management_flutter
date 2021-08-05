@@ -6,6 +6,7 @@ import 'package:stock_management_flutter/page/all_item_screen.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
 import 'package:stock_management_flutter/page/register_screen.dart';
 import 'package:stock_management_flutter/widgets/card_product_widget.dart';
+import 'package:stock_management_flutter/widgets/item_list_widget.dart';
 
 var fontFamily = 'Poppins';
 Color a = Color(0xff25C266);
@@ -55,6 +56,7 @@ class DashboardScreenMobile extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -233,8 +235,8 @@ class DashboardScreenMobile extends StatelessWidget {
                                           Navigator.push(context,
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                                    return AddToCartScreen();
-                                                  }));
+                                            return AddToCartScreen();
+                                          }));
                                         }),
                                     Text(
                                       "Sell",
@@ -302,16 +304,13 @@ class DashboardScreenMobile extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 16,
+                      height: 5,
                     ),
-                    Scrollbar(
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: ScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        children: [productCard()],
-                      ),
-                    )
+                    Container(
+                      height: 200,
+                      width: double.infinity,
+                      child: ItemListWidget(),
+                    ),
                   ],
                 ),
               )
@@ -322,5 +321,5 @@ class DashboardScreenMobile extends StatelessWidget {
     );
   }
 
-  Widget productCard() => ProductCardWidget();
+  // Widget productCard() => ProductCardWidget();ddddddddddddd
 }

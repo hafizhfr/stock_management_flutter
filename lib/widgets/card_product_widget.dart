@@ -2,6 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductCardWidget extends StatefulWidget {
+  final String productImg;
+  final String productName;
+  final int productPrice;
+  final int productStock;
+  ProductCardWidget(
+      this.productImg, this.productName, this.productPrice, this.productStock);
   @override
   _ProductCardWidget createState() => _ProductCardWidget();
 }
@@ -33,17 +39,20 @@ class _ProductCardWidget extends State<ProductCardWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Product Name",
+                            // "Product Name",
+                            widget.productName,
                             style: TextStyle(fontSize: 14),
                             textAlign: TextAlign.start,
                           ),
                           Text(
-                            "Price",
+                            // "Price",
+                            'Rp ' + widget.productPrice.toString(),
                             style: TextStyle(fontSize: 14),
                             textAlign: TextAlign.start,
                           ),
                           Text(
-                            "Stock",
+                            // "Stock",
+                            'Stok: ' + widget.productStock.toString(),
                             style: TextStyle(fontSize: 14),
                             textAlign: TextAlign.start,
                           ),
