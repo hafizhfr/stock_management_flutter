@@ -34,30 +34,40 @@ class _ProductCardWidget extends State<ProductCardWidget> {
                     width: 8,
                   ),
                   Expanded(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            // "Product Name",
-                            widget.productName,
-                            style: TextStyle(fontSize: 14),
-                            textAlign: TextAlign.start,
-                          ),
-                          Text(
-                            // "Price",
-                            'Rp ' + widget.productPrice.toString(),
-                            style: TextStyle(fontSize: 14),
-                            textAlign: TextAlign.start,
-                          ),
-                          Text(
-                            // "Stock",
-                            'Stok: ' + widget.productStock.toString(),
-                            style: TextStyle(fontSize: 14),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
-                      ))
+                    // flex: 4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          // "Product Name",
+                          widget.productName,
+                          style: TextStyle(fontSize: 14),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          // "Price",
+                          'Rp ' + widget.productPrice.toString(),
+                          style: TextStyle(fontSize: 14),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          // "Stock",
+                          'Stok: ' + widget.productStock.toString(),
+                          style: TextStyle(fontSize: 14),
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(icon: Icon(Icons.edit), onPressed: () {}),
+                        IconButton(icon: Icon(Icons.delete), onPressed: () {}),
+                      ],
+                    ),
+                  ),
                 ],
               ))),
     );

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:basic_utils/basic_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,9 +19,8 @@ class _AddItemScreen extends State<AddItemScreen> {
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
 
-  ItemCategoryController itemCategoryController = ItemCategoryController(itemCategory: 'Makanan');
-
-  String kategori = '';
+  ItemCategoryController itemCategoryController =
+      ItemCategoryController(itemCategory: 'Makanan');
 
   bool _validate = false;
 
@@ -147,7 +147,8 @@ class _AddItemScreen extends State<AddItemScreen> {
                         });
                       } else {
                         itemCollection.add({
-                          'namaBarang': itemNameController.text,
+                          'namaBarang':
+                              StringUtils.capitalize(itemNameController.text),
                           'jumlahBarang':
                               int.tryParse(itemCountController.text),
                           'hargaBarang': int.tryParse(itemPriceController.text),

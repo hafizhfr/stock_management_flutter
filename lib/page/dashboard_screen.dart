@@ -266,7 +266,13 @@ class DashboardScreenMobile extends StatelessWidget {
                                         ),
                                         iconSize: 64,
                                         alignment: Alignment.center,
-                                        onPressed: () {}),
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return AllItemScreen();
+                                          }));
+                                        }),
                                     Text(
                                       "Low Stock",
                                       style: TextStyle(fontSize: 16),
@@ -309,7 +315,7 @@ class DashboardScreenMobile extends StatelessWidget {
                     Container(
                       height: 200,
                       width: double.infinity,
-                      child: ItemListWidget(),
+                      child: ItemListWidget(''),
                     ),
                   ],
                 ),

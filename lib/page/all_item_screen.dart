@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_management_flutter/widgets/card_product_widget.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 import 'package:stock_management_flutter/widgets/item_list_widget.dart';
 
@@ -12,10 +12,11 @@ class AllItemScreen extends StatefulWidget {
 }
 
 class _AllItemScreen extends State<AllItemScreen> {
-  final items = List<String>.generate(10, (i) => "Item $i");
   final searchController = TextEditingController();
+  String searchQuery = '';
 
-  ItemCategoryController controller = ItemCategoryController(itemCategory: '');
+  ItemCategoryController controller =
+      ItemCategoryController(itemCategory: 'Makanan');
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class _AllItemScreen extends State<AllItemScreen> {
         },
       ),
       body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: Container(
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -45,6 +47,12 @@ class _AllItemScreen extends State<AllItemScreen> {
                 children: <Widget>[
                   Expanded(
                       child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value;
+                        print(searchQuery);
+                      });
+                    },
                     controller: searchController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.search, color: Colors.black),
@@ -53,12 +61,15 @@ class _AllItemScreen extends State<AllItemScreen> {
                   Expanded(child: dropDown()),
                 ],
               ),
+              SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: Container(
                   // padding: EdgeInsets.all(16),
                   height: MediaQuery.of(context).size.height,
                   width: double.infinity,
-                  child: ItemListWidget(),
+                  child: ItemListWidget(searchQuery),
                 ),
               ),
             ],
