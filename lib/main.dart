@@ -37,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
   final screens = [DashBoardScreen(), HistoryScreen(), RegisterScreen()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
