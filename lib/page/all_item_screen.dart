@@ -15,8 +15,7 @@ class _AllItemScreen extends State<AllItemScreen> {
   final searchController = TextEditingController();
   String searchQuery = '';
 
-  ItemCategoryController controller =
-      ItemCategoryController(itemCategory: 'Makanan');
+  ItemCategoryController controller = ItemCategoryController(itemCategory: '');
 
   @override
   Widget build(BuildContext context) {

@@ -34,6 +34,7 @@ class _AddItemScreen extends State<AddItemScreen> {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.amberAccent,
           title: Text("Add New Item"),
         ),
         resizeToAvoidBottomInset: false,
@@ -107,71 +108,76 @@ class _AddItemScreen extends State<AddItemScreen> {
                 SizedBox(
                   height: 32,
                 ),
-                Flexible(
-                    child: Container(
-                  height: 50,
-                  width: itemWidth / 3,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.grey),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: itemWidth / 3,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.grey),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                     side: BorderSide(color: Colors.grey)))),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Simpan',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Icon(
-                            Icons.save,
-                            color: Colors.black,
-                          )
-                        ]),
-                    onPressed: () {
-                      if (itemNameController.text.isEmpty ||
-                          itemCountController.text.isEmpty ||
-                          itemPriceController.text.isEmpty) {
-                        setState(() {
-                          _validate = true;
-                        });
-                      } else {
-                        itemCollection.add({
-                          'namaBarang':
-                              StringUtils.capitalize(itemNameController.text),
-                          'jumlahBarang':
-                              int.tryParse(itemCountController.text),
-                          'hargaBarang': int.tryParse(itemPriceController.text),
-                          'kategori': itemCategoryController.itemCategory,
-                        });
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Simpan',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Icon(
+                                Icons.save,
+                                color: Colors.black,
+                              )
+                            ]),
+                        onPressed: () {
+                          if (itemNameController.text.isEmpty ||
+                              itemCountController.text.isEmpty ||
+                              itemPriceController.text.isEmpty) {
+                            setState(() {
+                              _validate = true;
+                            });
+                          } else {
+                            itemCollection.add({
+                              'namaBarang': StringUtils.capitalize(
+                                  itemNameController.text),
+                              'jumlahBarang':
+                                  int.tryParse(itemCountController.text),
+                              'hargaBarang':
+                                  int.tryParse(itemPriceController.text),
+                              'kategori': itemCategoryController.itemCategory,
+                            });
 
-                        itemNameController.text = '';
-                        itemCountController.text = '';
-                        itemPriceController.text = '';
-                        Fluttertoast.showToast(
-                            msg: 'Berhasil menambahkan barang baru',
-                            toastLength: Toast.LENGTH_LONG,
-                            gravity: ToastGravity.BOTTOM,
-                            fontSize: 16.0);
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) {
-                        //   _validate = false;
-                        //   return DashBoardScreen();
-                        // }));
-                      }
-                    },
-                  ),
-                ))
+                            itemNameController.text = '';
+                            itemCountController.text = '';
+                            itemPriceController.text = '';
+                            Fluttertoast.showToast(
+                                msg: 'Berhasil menambahkan barang baru',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM,
+                                fontSize: 16.0);
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) {
+                            //   _validate = false;
+                            //   return DashBoardScreen();
+                            // }));
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

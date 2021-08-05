@@ -10,7 +10,7 @@ class DropDownCategoryWidget extends StatefulWidget {
 }
 
 class _DropDownCategoryWidget extends State<DropDownCategoryWidget> {
-  String _dropDownValue = "Makanan";
+  String _dropDownValue;
 
   List<String> kategoriBarang = [
     'Makanan',
@@ -33,6 +33,7 @@ class _DropDownCategoryWidget extends State<DropDownCategoryWidget> {
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
+            hint: Text('Pilih Kategori ...'),
             value: _dropDownValue,
             isDense: true,
             isExpanded: true,
