@@ -27,17 +27,17 @@ class _LoginScreenState extends State<LoginScreen> {
     final double itemWidth = size.width - 64;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
+      body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Flexible(
-                flex: 2,
+            Expanded(
+                flex: 3,
                 child: Container(
-                  alignment: Alignment.topLeft,
+                  alignment: Alignment.centerLeft,
                   child: Text(
                     "Let’s Get\nStarted",
                     style: TextStyle(
@@ -49,12 +49,11 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 16,
             ),
-            Flexible(
-                fit: FlexFit.tight,
-                flex: 3,
+            Expanded(
+                flex: 4,
                 child: Container(
-                  width: 250,
-                  height: 250,
+                  width: 200,
+                  height: 200,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -64,28 +63,29 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 16,
             ),
-            Flexible(
-                child: Container(
-                    width: itemWidth,
-                    child: Text(
-                      "Email",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      textAlign: TextAlign.start,
-                    ))),
-            SizedBox(
-              height: 4,
-            ),
-            Flexible(
+            // Flexible(
+            //     child: Container(
+            //         width: itemWidth,
+            //         child: Text(
+            //           "Email",
+            //           style: TextStyle(
+            //             fontSize: 20,
+            //           ),
+            //           textAlign: TextAlign.start,
+            //         ))),
+            // SizedBox(
+            //   height: 4,
+            // ),
+            Expanded(
+              flex: 1,
                 child: Container(
                     child: TextField(
               keyboardType: TextInputType.emailAddress,
               controller: emailController,
               decoration: InputDecoration(
-                hintText: 'email',
+                hintText: 'Email',
                 errorText: _validate ? 'Name Can\'t Be Empty' : null,
-                labelStyle: TextStyle(color: a),
+                labelStyle: TextStyle(color: Colors.grey),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: a),
                 ),
@@ -98,27 +98,28 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 16,
             ),
-            Flexible(
-                child: Container(
-                    width: itemWidth,
-                    child: Text(
-                      "Password",
-                      style: TextStyle(fontSize: 20),
-                      textAlign: TextAlign.start,
-                    ))),
-            SizedBox(
-              height: 4,
-            ),
-            Flexible(
+            // Flexible(
+            //     child: Container(
+            //         width: itemWidth,
+            //         child: Text(
+            //           "Password",
+            //           style: TextStyle(fontSize: 20),
+            //           textAlign: TextAlign.start,
+            //         ))),
+            // SizedBox(
+            //   height: 4,
+            // ),
+            Expanded(
+              flex: 1,
                 child: Container(
                     child: TextField(
               obscureText: true,
               keyboardType: TextInputType.visiblePassword,
               controller: passwordController,
               decoration: InputDecoration(
-                hintText: 'password',
+                hintText: "Password",
                 errorText: _validate ? 'Password Can\'t Be Empty' : null,
-                labelStyle: TextStyle(color: a),
+                labelStyle: TextStyle(color: Colors.grey),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: a),
                 ),
@@ -131,7 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 32,
             ),
-            Flexible(
+            Expanded(
+              flex: 1,
                 child: Container(
               height: 50,
               width: itemWidth,
@@ -175,7 +177,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
             )),
-            Flexible(
+            Expanded(
+              flex: 1,
                 child: Container(
               child: TextButton(
                 style: TextButton.styleFrom(
