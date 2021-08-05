@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
-import 'package:stock_management_flutter/widgets/dropdown_widget.dart';
+import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 
 class AddItemScreen extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _AddItemScreen extends State<AddItemScreen> {
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
 
-  ItemCategoryController controller = ItemCategoryController(itemCategory: '');
+  ItemCategoryController itemCategoryController = ItemCategoryController(itemCategory: 'Makanan');
 
   String kategori = '';
 
@@ -86,8 +86,8 @@ class _AddItemScreen extends State<AddItemScreen> {
                   height: 16,
                 ),
                 Flexible(
-                    child: DropDownWidget(
-                  controller,
+                    child: DropDownCategoryWidget(
+                  itemCategoryController,
                 )),
                 SizedBox(
                   height: 8,
@@ -151,7 +151,7 @@ class _AddItemScreen extends State<AddItemScreen> {
                           'jumlahBarang':
                               int.tryParse(itemCountController.text),
                           'hargaBarang': int.tryParse(itemPriceController.text),
-                          'kategori': controller.itemCategory,
+                          'kategori': itemCategoryController.itemCategory,
                         });
 
                         itemNameController.text = '';
@@ -160,7 +160,7 @@ class _AddItemScreen extends State<AddItemScreen> {
                         Fluttertoast.showToast(
                             msg: 'Berhasil menambahkan barang baru',
                             toastLength: Toast.LENGTH_LONG,
-                            gravity: ToastGravity.TOP,
+                            gravity: ToastGravity.BOTTOM,
                             fontSize: 16.0);
                         // Navigator.push(context,
                         //     MaterialPageRoute(builder: (context) {
@@ -185,5 +185,5 @@ class _AddItemScreen extends State<AddItemScreen> {
     super.dispose();
   }
 
-  Widget dropDown() => DropDownWidget(controller);
+  Widget dropDown() => DropDownCategoryWidget(itemCategoryController);
 }

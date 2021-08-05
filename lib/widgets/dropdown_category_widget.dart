@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DropDownWidget extends StatefulWidget {
+class DropDownCategoryWidget extends StatefulWidget {
   final ItemCategoryController controller;
 
-  DropDownWidget(this.controller);
+  DropDownCategoryWidget(this.controller);
   @override
-  _DropDownWidget createState() => _DropDownWidget();
+  _DropDownCategoryWidget createState() => _DropDownCategoryWidget();
 }
 
-class _DropDownWidget extends State<DropDownWidget> {
+class _DropDownCategoryWidget extends State<DropDownCategoryWidget> {
   String _dropDownValue = "Makanan";
 
   List<String> kategoriBarang = [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/widgets/card_product_widget.dart';
-import 'package:stock_management_flutter/widgets/dropdown_widget.dart';
+import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 
 import 'add_item_screen.dart';
 
@@ -64,6 +64,6 @@ class _AllItemScreen extends State<AllItemScreen> {
     );
   }
 
-  Widget dropDown() => DropDownWidget(controller);
+  Widget dropDown() => DropDownCategoryWidget(controller);
   Widget productCard() => ProductCardWidget();
 }

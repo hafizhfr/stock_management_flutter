@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/page/history.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
 
@@ -51,13 +52,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Text(
                             "Create Account",
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 38,
                               fontWeight: FontWeight.bold,
                             ),
+                            textAlign: TextAlign.start,
                           ),
                           Text(
                             "Sign up to get started",
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -102,11 +107,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           } else {
                             await AuthServices.signUp(nameController.text,
                                 emailController.text, passwordController.text);
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) {
-                            //   _validate = false;
-                            //   return HistoryScreen();
-                            // }));
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return DashBoardScreen();
+                            }));
                           }
                         },
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/page/add_cart_screen.dart';
 import 'package:stock_management_flutter/page/add_item_screen.dart';
 import 'package:stock_management_flutter/page/all_item_screen.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
@@ -228,7 +229,13 @@ class DashboardScreenMobile extends StatelessWidget {
                                         ),
                                         iconSize: 64,
                                         alignment: Alignment.center,
-                                        onPressed: () {}),
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return AddToCartScreen();
+                                                  }));
+                                        }),
                                     Text(
                                       "Sell",
                                       style: TextStyle(fontSize: 16),
