@@ -4,6 +4,7 @@ import 'package:stock_management_flutter/page/add_cart_screen.dart';
 import 'package:stock_management_flutter/page/add_item_screen.dart';
 import 'package:stock_management_flutter/page/all_item_screen.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
+import 'package:stock_management_flutter/page/low_stock_item_screen.dart';
 import 'package:stock_management_flutter/page/register_screen.dart';
 import 'package:stock_management_flutter/widgets/card_product_widget.dart';
 import 'package:stock_management_flutter/widgets/item_list_widget.dart';
@@ -270,7 +271,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                           Navigator.push(context,
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                            return AllItemScreen();
+                                            return LowStockItemScreen();
                                           }));
                                         }),
                                     Text(
@@ -315,7 +316,7 @@ class DashboardScreenMobile extends StatelessWidget {
                     Container(
                       height: 200,
                       width: double.infinity,
-                      child: ItemListWidget(''),
+                      child: ItemListWidget('', false),
                     ),
                   ],
                 ),

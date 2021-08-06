@@ -8,12 +8,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 
-class AddItemScreen extends StatefulWidget {
+class EditItemScreen extends StatefulWidget {
+  final String productName;
+
+  EditItemScreen(this.productName);
   @override
-  _AddItemScreen createState() => _AddItemScreen();
+  _EditItemScreen createState() => _EditItemScreen();
 }
 
-class _AddItemScreen extends State<AddItemScreen> {
+class _EditItemScreen extends State<EditItemScreen> {
   File _image;
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
@@ -28,6 +31,7 @@ class _AddItemScreen extends State<AddItemScreen> {
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference itemCollection = firestore.collection('items');
+    itemNameController.text = widget.productName;
 
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width;
@@ -35,7 +39,7 @@ class _AddItemScreen extends State<AddItemScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.amberAccent,
-          title: Text("Add New Item"),
+          title: Text("Edit Item"),
         ),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -68,7 +72,7 @@ class _AddItemScreen extends State<AddItemScreen> {
                   height: 16,
                 ),
                 Flexible(
-                    child: TextField(
+                    child: TextFormField(
                   controller: itemNameController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), labelText: "Nama Item"),
@@ -149,29 +153,26 @@ class _AddItemScreen extends State<AddItemScreen> {
                               _validate = true;
                             });
                           } else {
-                            itemCollection.add({
-                              'namaBarang': StringUtils.capitalize(
-                                  itemNameController.text),
-                              'jumlahBarang':
-                                  int.tryParse(itemCountController.text),
-                              'hargaBarang':
-                                  int.tryParse(itemPriceController.text),
-                              'kategori': itemCategoryController.itemCategory,
-                            });
-
-                            itemNameController.clear();
-                            itemCountController.clear();
-                            itemPriceController.clear();
+                            _updateItem(
+                                widget.productName,
+                                itemNameController.text,
+                                int.tryParse(itemCountController.text),
+                                int.tryParse(itemPriceController.text),
+                                itemCategoryController.itemCategory);
+                            // itemCollection.doc().update({
+                            //   'namaBarang': StringUtils.capitalize(
+                            //       itemNameController.text),
+                            //   'jumlahBarang':
+                            //       int.tryParse(itemCountController.text),
+                            //   'hargaBarang':
+                            //       int.tryParse(itemPriceController.text),
+                            //   'kategori': itemCategoryController.itemCategory,
+                            // });
                             Fluttertoast.showToast(
-                                msg: 'Berhasil menambahkan barang baru',
+                                msg: 'Berhasil mengupdate barang',
                                 toastLength: Toast.LENGTH_LONG,
                                 gravity: ToastGravity.BOTTOM,
                                 fontSize: 16.0);
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) {
-                            //   _validate = false;
-                            //   return DashBoardScreen();
-                            // }));
                           }
                         },
                       ),
@@ -182,6 +183,22 @@ class _AddItemScreen extends State<AddItemScreen> {
             ),
           ),
         ));
+  }
+
+  Future<void> _updateItem(String productName, String newName, int newCount,
+      int newPrice, String newCategory) async {
+    CollectionReference itemCollection =
+        FirebaseFirestore.instance.collection('items');
+
+    var filteredDocumentByName =
+        await itemCollection.where('namaBarang', isEqualTo: productName).get();
+    for (var doc in filteredDocumentByName.docs) {
+      await doc.reference
+          .update({'namaBarang': StringUtils.capitalize(newName)});
+      await doc.reference.update({'jumlahBarang': newCount});
+      await doc.reference.update({'hargaBarang': newPrice});
+      await doc.reference.update({'kategori': newCategory});
+    }
   }
 
   @override

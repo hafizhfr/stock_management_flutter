@@ -6,12 +6,12 @@ import 'package:stock_management_flutter/widgets/item_list_widget.dart';
 
 import 'add_item_screen.dart';
 
-class AllItemScreen extends StatefulWidget {
+class LowStockItemScreen extends StatefulWidget {
   @override
-  _AllItemScreen createState() => _AllItemScreen();
+  _LowStockItemScreen createState() => _LowStockItemScreen();
 }
 
-class _AllItemScreen extends State<AllItemScreen> {
+class _LowStockItemScreen extends State<LowStockItemScreen> {
   final searchController = TextEditingController();
   String searchQuery = '';
 

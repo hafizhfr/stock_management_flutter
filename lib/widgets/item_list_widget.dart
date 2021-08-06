@@ -4,7 +4,8 @@ import 'package:stock_management_flutter/widgets/card_product_widget.dart';
 
 class ItemListWidget extends StatefulWidget {
   final String searchQuery;
-  ItemListWidget(this.searchQuery);
+  final bool isLowStockPage;
+  ItemListWidget(this.searchQuery, this.isLowStockPage);
   @override
   _ItemListWidgetState createState() => _ItemListWidgetState();
 }
@@ -17,18 +18,29 @@ class _ItemListWidgetState extends State<ItemListWidget> {
     CollectionReference itemCollection = firestore.collection('items');
 
     return Container(
+      // height: MediaQuery.of(context).size.height,
       // child: Scrollbar(
       child: ListView(
         shrinkWrap: true,
         children: [
           StreamBuilder<QuerySnapshot>(
-              stream: widget.searchQuery == ''
-                  ? itemCollection.orderBy('namaBarang').snapshots()
-                  : itemCollection
-                      .where('namaBarang',
-                          isGreaterThanOrEqualTo: widget.searchQuery)
-                      .orderBy('namaBarang')
-                      .snapshots(),
+              stream: !widget.isLowStockPage
+                  ? widget.searchQuery == ''
+                      ? itemCollection.orderBy('namaBarang').snapshots()
+                      : itemCollection
+                          .where('namaBarang',
+                              isGreaterThanOrEqualTo: widget.searchQuery)
+                          .orderBy('namaBarang')
+                          .snapshots()
+                  : widget.searchQuery == ''
+                      ? itemCollection
+                          .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                          .snapshots()
+                      : itemCollection
+                          .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                          // .where('namaBarang',
+                          //     isGreaterThanOrEqualTo: widget.searchQuery)
+                          .snapshots(),
               builder: (_, snapshot) {
                 if (snapshot.hasData) {
                   return Column(
