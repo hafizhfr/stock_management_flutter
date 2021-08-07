@@ -77,24 +77,24 @@ class _LoginScreenState extends State<LoginScreen> {
             //   height: 4,
             // ),
             Expanded(
-              flex: 1,
+                flex: 1,
                 child: Container(
                     child: TextField(
-              keyboardType: TextInputType.emailAddress,
-              controller: emailController,
-              decoration: InputDecoration(
-                hintText: 'Email',
-                errorText: _validate ? 'Name Can\'t Be Empty' : null,
-                labelStyle: TextStyle(color: Colors.grey),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: a),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: a),
-                ),
-              ),
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            ))),
+                  keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    errorText: _validate ? 'Name Can\'t Be Empty' : null,
+                    labelStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: a),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: a),
+                    ),
+                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ))),
             SizedBox(
               height: 16,
             ),
@@ -110,88 +110,90 @@ class _LoginScreenState extends State<LoginScreen> {
             //   height: 4,
             // ),
             Expanded(
-              flex: 1,
+                flex: 1,
                 child: Container(
                     child: TextField(
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              controller: passwordController,
-              decoration: InputDecoration(
-                hintText: "Password",
-                errorText: _validate ? 'Password Can\'t Be Empty' : null,
-                labelStyle: TextStyle(color: Colors.grey),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: a),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: a),
-                ),
-              ),
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            ))),
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    errorText: _validate ? 'Password Can\'t Be Empty' : null,
+                    labelStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: a),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: a),
+                    ),
+                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ))),
             SizedBox(
               height: 32,
             ),
             Expanded(
-              flex: 1,
+                flex: 1,
                 child: Container(
-              height: 50,
-              width: itemWidth,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.green),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.grey)))),
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                      fontFamily: fontFamily,
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                onPressed: () async {
-                  if (emailController.text.isEmpty ||
-                      passwordController.text.isEmpty) {
-                    setState(() {
-                      _validate = true;
-                    });
-                  } else {
-                    User user = await AuthServices.signIn(
-                        emailController.text, passwordController.text);
-                    if (user != null) {
+                  height: 50,
+                  width: itemWidth,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.green),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.grey)))),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                          fontFamily: fontFamily,
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () async {
+                      if (emailController.text.isEmpty ||
+                          passwordController.text.isEmpty) {
+                        setState(() {
+                          _validate = true;
+                        });
+                      } else {
+                        User user = await AuthServices.signIn(
+                            emailController.text, passwordController.text);
+                        if (user != null) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            _validate = false;
+                            return DashBoardScreen();
+                          }));
+                        } else {
+                          setState(() {
+                            _validate = true;
+                          });
+                        }
+                      }
+                    },
+                  ),
+                )),
+            Expanded(
+                flex: 1,
+                child: Container(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: TextStyle(fontSize: 15),
+                    ),
+                    child: Text("Create An Account"),
+                    onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        _validate = false;
-                        return DashBoardScreen();
+                        return RegisterScreen();
                       }));
-                    } else {
-                      setState(() {
-                        _validate = true;
-                      });
-                    }
-                  }
-                },
-              ),
-            )),
-            Expanded(
-              flex: 1,
-                child: Container(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: TextStyle(fontSize: 15),
-                ),
-                child: Text("Create An Account"),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return RegisterScreen();
-                  }));
-                },
-              ),
-            ))
+                    },
+                  ),
+                ))
           ],
         ),
       )),
