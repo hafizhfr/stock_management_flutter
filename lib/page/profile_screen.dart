@@ -24,55 +24,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Container(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 32),
+            padding: EdgeInsets.symmetric(vertical: 16),
             // physics: NeverScrollableScrollPhysics(),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Expanded(
-                      flex: 2,
-                      child: Stack(
-                        clipBehavior: Clip.hardEdge,
-                        children: [
-                          CircleAvatar(
-                            radius: 70,
-                            backgroundImage: NetworkImage(
-                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8zpfdzQKEDKixZ57SDbZz-BY-Wj94ZcUo0w&usqp=CAU'),
-                          ),
-                          Positioned(
-                              bottom: 5,
-                              right: 5,
-                              child: InkWell(
-                                // borderRadius: BorderRadius.all(Radius.circular(60)),
-                                onTap: () {
-                                  setState(() {
-                                    isEnableTextField = !isEnableTextField;
-                                  });
-                                },
-                                child: ClipOval(
-                                  child: Container(
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(40)),
-                                        color: Colors.blue,
-                                        border: Border.all(
-                                            color: Colors.white, width: 2)),
-                                    child: Icon(
-                                      Icons.edit,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                  Stack(
+                    overflow: Overflow.visible,
+                    children: [
+                      CircleAvatar(
+                        radius: 75,
+                        backgroundImage: NetworkImage(
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8zpfdzQKEDKixZ57SDbZz-BY-Wj94ZcUo0w&usqp=CAU'),
+                      ),
+                      Positioned(
+                          bottom: 5,
+                          right: 5,
+                          child: InkWell(
+                            // borderRadius: BorderRadius.all(Radius.circular(60)),
+                            onTap: () {
+                              setState(() {
+                                isEnableTextField = !isEnableTextField;
+                              });
+                            },
+                            child: ClipOval(
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(40)),
+                                    color: Colors.blue,
+                                    border: Border.all(
+                                        color: Colors.white, width: 2)),
+                                child: Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
                                 ),
-                              ))
-                        ],
-                      )),
+                              ),
+                            ),
+                          ))
+                    ],
+                  ),
                   SizedBox(
                     height: 70,
                   ),
-                  Expanded(
-                      child: Card(
+                  Card(
                     color: Colors.white,
                     margin:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
@@ -89,9 +86,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
-                  )),
-                  Expanded(
-                      child: Card(
+                  ),
+                  Card(
                     color: Colors.white,
                     margin:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
@@ -108,28 +104,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
-                  )),
+                  ),
                   SizedBox(
                     height: 70,
                   ),
-                  Expanded(
-                    child: Visibility(
-                        visible: isEnableTextField,
-                        child: RaisedButton(
-                          padding: EdgeInsets.only(left: 70, right: 70),
-                          onPressed: () {},
-                          color: Colors.blue,
-                          child: Text('Edit Profile'),
-                        )),
-                  ),
-                  Expanded(
-                      child: Visibility(
-                          visible: !isEnableTextField,
-                          child: RaisedButton(
-                            onPressed: () {},
-                            color: Colors.red,
-                            child: Text('Logout'),
-                          )))
+                  Visibility(
+                      visible: isEnableTextField,
+                      child: RaisedButton(
+                        padding: EdgeInsets.only(left: 70, right: 70),
+                        onPressed: () {},
+                        color: Colors.blue,
+                        child: Text('Edit Profile'),
+                      )),
+                  Visibility(
+                      visible: !isEnableTextField,
+                      child: RaisedButton(
+                        onPressed: () {},
+                        color: Colors.red,
+                        child: Text('Logout'),
+                      ))
                 ]),
           ),
         ),

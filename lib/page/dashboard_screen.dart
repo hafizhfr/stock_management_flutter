@@ -73,89 +73,94 @@ class DashboardScreenMobile extends StatelessWidget {
                         borderRadius:
                             BorderRadius.vertical(bottom: Radius.circular(32))),
                   ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 32),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(4)),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                  Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 32),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Row(
                           children: <Widget>[
-                            Text(
-                              "Total Sales",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16),
+                            Expanded(
+                                child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Total Sales",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Rp.1.000.000",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            )),
+                            Container(
+                              width: 2,
+                              height: 48,
+                              color: Colors.amber,
                             ),
-                            SizedBox(
-                              height: 10,
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Stock In",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "200",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
                             ),
-                            Text(
-                              "Rp.1.000.000",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            Container(
+                              width: 2,
+                              height: 48,
+                              color: Colors.amber,
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Stock Out",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "150",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
                             )
                           ],
-                        )),
-                        Container(
-                          width: 2,
-                          height: 48,
-                          color: Colors.amber,
                         ),
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Stock In",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "200",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: 2,
-                          height: 48,
-                          color: Colors.amber,
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Stock Out",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "150",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
+                      ))
                 ],
               ),
               Padding(
@@ -328,5 +333,5 @@ class DashboardScreenMobile extends StatelessWidget {
     );
   }
 
-  // Widget productCard() => ProductCardWidget();ddddddddddddd
+// Widget productCard() => ProductCardWidget();ddddddddddddd
 }

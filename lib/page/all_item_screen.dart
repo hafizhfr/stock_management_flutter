@@ -56,9 +56,6 @@ class _AllItemScreen extends State<AllItemScreen> {
                             controller: searchController,
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.search
-                              //   icon: Icon(
-                              // Icons.search,
-                              // color: Colors.black,
                             ),
                             hintText: "Search...",
                             )
