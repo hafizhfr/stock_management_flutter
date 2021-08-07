@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:basic_utils/basic_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 import 'package:stock_management_flutter/widgets/item_list_widget.dart';
@@ -42,6 +43,7 @@ class _AllItemScreen extends State<AllItemScreen> {
             children: <Widget>[
               Container(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Expanded(
                         child: TextField(
@@ -53,10 +55,15 @@ class _AllItemScreen extends State<AllItemScreen> {
                             },
                             controller: searchController,
                             decoration: InputDecoration(
-                                icon: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                            )))),
+                              prefixIcon: Icon(Icons.search
+                              //   icon: Icon(
+                              // Icons.search,
+                              // color: Colors.black,
+                            ),
+                            hintText: "Search...",
+                            )
+                        )),
+                    SizedBox(width: 8,),
                     Expanded(child: dropDown()),
                   ],
                 ),

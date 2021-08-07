@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/page/history.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
+import 'package:stock_management_flutter/page/profile_screen.dart';
 import 'package:stock_management_flutter/page/register_screen.dart';
 
 void main() async {
@@ -36,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
-  final screens = [DashBoardScreen(), HistoryScreen(), RegisterScreen()];
+  final screens = [DashBoardScreen(), HistoryScreen(), ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {
