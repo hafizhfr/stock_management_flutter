@@ -10,8 +10,10 @@ import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 
 class EditItemScreen extends StatefulWidget {
   final String productName;
+  final int productPrice;
+  final int productStock;
 
-  EditItemScreen(this.productName);
+  EditItemScreen(this.productName, this.productPrice, this.productStock);
   @override
   _EditItemScreen createState() => _EditItemScreen();
 }
@@ -22,167 +24,174 @@ class _EditItemScreen extends State<EditItemScreen> {
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
 
-  ItemCategoryController itemCategoryController =
-      ItemCategoryController(itemCategory: 'Makanan');
-
   bool _validate = false;
 
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference itemCollection = firestore.collection('items');
+    //set initial value
     itemNameController.text = widget.productName;
+    itemPriceController.text = widget.productPrice.toString();
+    itemCountController.text = widget.productStock.toString();
+    ItemCategoryController itemCategoryController =
+        ItemCategoryController(itemCategory: '');
 
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width;
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.amberAccent,
-          title: Text("Edit Item"),
-        ),
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Flexible(
-                  flex: 3,
-                  child: Container(
-                    color: Colors.grey,
-                    padding: EdgeInsets.all(48),
-                    child: IconButton(
-                      iconSize: 36,
-                      icon: Icon(
-                        Icons.photo_camera_outlined,
-                        color: Colors.white,
-                        size: 36,
-                      ),
+      appBar: AppBar(
+        backgroundColor: Colors.amberAccent,
+        title: Text("Edit Item"),
+      ),
+      // resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+          // ClampingScrollPhysics(parent: NeverScrollableScrollPhysics()),
+          // child: Padding(
+          //   padding: const EdgeInsets.all(32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                color: Colors.grey,
+                // padding: EdgeInsets.all(48),
+                child: IconButton(
+                  iconSize: 150,
+                  icon: Icon(
+                    Icons.photo_camera_outlined,
+                    color: Colors.white,
+                    size: 36,
+                  ),
+                  onPressed: () {
+                    //image picker
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                controller: itemNameController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: "Nama Item"),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                controller: itemCountController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: "Jumlah Item"),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              DropDownCategoryWidget(
+                itemCategoryController,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                controller: itemPriceController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    prefixText: "Rp. ",
+                    labelText: "Harga Per Item"),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 50,
+                    width: itemWidth / 3,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.grey),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      side: BorderSide(color: Colors.grey)))),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Simpan',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.save,
+                              color: Colors.black,
+                            )
+                          ]),
                       onPressed: () {
-                        //image picker
+                        if (itemNameController.text.isEmpty ||
+                            itemCountController.text.isEmpty ||
+                            itemPriceController.text.isEmpty ||
+                            itemCategoryController.itemCategory == '') {
+                          Fluttertoast.showToast(
+                            msg:
+                                'Gagal mengupdate barang. Seluruh kolom harus diisi.',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            fontSize: 16.0,
+                          );
+                          setState(() {
+                            _validate = true;
+                          });
+                        } else {
+                          _updateItem(
+                              widget.productName,
+                              itemNameController.text,
+                              int.tryParse(itemCountController.text),
+                              int.tryParse(itemPriceController.text),
+                              itemCategoryController.itemCategory);
+                          // itemCollection.doc().update({
+                          //   'namaBarang': StringUtils.capitalize(
+                          //       itemNameController.text),
+                          //   'jumlahBarang':
+                          //       int.tryParse(itemCountController.text),
+                          //   'hargaBarang':
+                          //       int.tryParse(itemPriceController.text),
+                          //   'kategori': itemCategoryController.itemCategory,
+                          // });
+                          Fluttertoast.showToast(
+                            msg: 'Berhasil mengupdate barang',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            fontSize: 16.0,
+                          );
+                        }
                       },
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Flexible(
-                    child: TextFormField(
-                  controller: itemNameController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: "Nama Item"),
-                )),
-                SizedBox(
-                  height: 16,
-                ),
-                Flexible(
-                    child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: itemCountController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: "Jumlah Item"),
-                )),
-                SizedBox(
-                  height: 16,
-                ),
-                Flexible(
-                    child: DropDownCategoryWidget(
-                  itemCategoryController,
-                )),
-                SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Flexible(
-                    child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: itemPriceController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      prefixText: "Rp. ",
-                      labelText: "Harga Per Item"),
-                )),
-                SizedBox(
-                  height: 32,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 50,
-                      width: itemWidth / 3,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.grey),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    side: BorderSide(color: Colors.grey)))),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Simpan',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Icons.save,
-                                color: Colors.black,
-                              )
-                            ]),
-                        onPressed: () {
-                          if (itemNameController.text.isEmpty ||
-                              itemCountController.text.isEmpty ||
-                              itemPriceController.text.isEmpty) {
-                            setState(() {
-                              _validate = true;
-                            });
-                          } else {
-                            _updateItem(
-                                widget.productName,
-                                itemNameController.text,
-                                int.tryParse(itemCountController.text),
-                                int.tryParse(itemPriceController.text),
-                                itemCategoryController.itemCategory);
-                            // itemCollection.doc().update({
-                            //   'namaBarang': StringUtils.capitalize(
-                            //       itemNameController.text),
-                            //   'jumlahBarang':
-                            //       int.tryParse(itemCountController.text),
-                            //   'hargaBarang':
-                            //       int.tryParse(itemPriceController.text),
-                            //   'kategori': itemCategoryController.itemCategory,
-                            // });
-                            Fluttertoast.showToast(
-                                msg: 'Berhasil mengupdate barang',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.BOTTOM,
-                                fontSize: 16.0);
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Future<void> _updateItem(String productName, String newName, int newCount,
@@ -208,6 +217,4 @@ class _EditItemScreen extends State<EditItemScreen> {
     itemPriceController.dispose();
     super.dispose();
   }
-
-  Widget dropDown() => DropDownCategoryWidget(itemCategoryController);
 }

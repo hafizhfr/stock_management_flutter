@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
 import 'package:stock_management_flutter/page/add_cart_screen.dart';
 import 'package:stock_management_flutter/page/add_item_screen.dart';
 import 'package:stock_management_flutter/page/all_item_screen.dart';
@@ -16,34 +18,26 @@ Color c = Color(0xff33333F);
 Color d = Color(0xff8E8E93);
 
 class DashBoardScreen extends StatelessWidget {
-  final String email;
-  final String password;
-
-  DashBoardScreen({this.email, this.password});
-
+  final User user = AuthServices.getUser();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.amber,
-          elevation: 0,
-          title: Text(
-            'Welcome, $email',
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Poppins',
-              fontSize: 24,
-            ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.amber,
+        elevation: 0,
+        title: Text(
+          'Welcome, ${user.displayName}',
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Poppins',
+            fontSize: 20,
           ),
         ),
-        body: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth <= 600) {
-            return DashboardScreenMobile();
-          }
-        }));
+      ),
+      body: DashboardScreenMobile(),
+    );
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/main.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/page/register_screen.dart';
 
@@ -27,16 +28,16 @@ class _LoginScreenState extends State<LoginScreen> {
     final double itemWidth = size.width - 64;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-                flex: 3,
-                child: Container(
+      body: SingleChildScrollView(
+          physics:
+              ClampingScrollPhysics(parent: NeverScrollableScrollPhysics()),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Let’s Get\nStarted",
@@ -45,13 +46,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                )),
-            SizedBox(
-              height: 16,
-            ),
-            Expanded(
-                flex: 4,
-                child: Container(
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Container(
                   width: 200,
                   height: 200,
                   alignment: Alignment.center,
@@ -59,82 +58,66 @@ class _LoginScreenState extends State<LoginScreen> {
                       image: DecorationImage(
                           image: AssetImage('images/signup_illustration.jpg'),
                           fit: BoxFit.cover)),
-                )),
-            SizedBox(
-              height: 16,
-            ),
-            // Flexible(
-            //     child: Container(
-            //         width: itemWidth,
-            //         child: Text(
-            //           "Email",
-            //           style: TextStyle(
-            //             fontSize: 20,
-            //           ),
-            //           textAlign: TextAlign.start,
-            //         ))),
-            // SizedBox(
-            //   height: 4,
-            // ),
-            Expanded(
-                flex: 1,
-                child: Container(
-                    child: TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    errorText: _validate ? 'Name Can\'t Be Empty' : null,
-                    labelStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: a),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+
+                Container(
+                  child: TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      errorText: _validate ? 'Email can\'t be empty' : null,
+                      labelStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: a),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: a),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: a),
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ))),
-            SizedBox(
-              height: 16,
-            ),
-            // Flexible(
-            //     child: Container(
-            //         width: itemWidth,
-            //         child: Text(
-            //           "Password",
-            //           style: TextStyle(fontSize: 20),
-            //           textAlign: TextAlign.start,
-            //         ))),
-            // SizedBox(
-            //   height: 4,
-            // ),
-            Expanded(
-                flex: 1,
-                child: Container(
-                    child: TextField(
-                  obscureText: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    hintText: "Password",
-                    errorText: _validate ? 'Password Can\'t Be Empty' : null,
-                    labelStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: a),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                // Flexible(
+                //     child: Container(
+                //         width: itemWidth,
+                //         child: Text(
+                //           "Password",
+                //           style: TextStyle(fontSize: 20),
+                //           textAlign: TextAlign.start,
+                //         ))),
+                // SizedBox(
+                //   height: 4,
+                // ),
+                Container(
+                  child: TextField(
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      errorText: _validate ? 'Password can\'t be empty' : null,
+                      labelStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: a),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: a),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: a),
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ))),
-            SizedBox(
-              height: 32,
-            ),
-            Expanded(
-                flex: 1,
-                child: Container(
+                ),
+                SizedBox(
+                  height: 32,
+                ),
+                Container(
                   height: 50,
                   width: itemWidth,
                   child: ElevatedButton(
@@ -167,20 +150,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             _validate = false;
-                            return DashBoardScreen();
+                            return MyHomePage();
                           }));
                         } else {
-                          setState(() {
-                            _validate = true;
-                          });
+                          setState(() {});
                         }
                       }
                     },
                   ),
-                )),
-            Expanded(
-                flex: 1,
-                child: Container(
+                ),
+                Container(
                   child: TextButton(
                     style: TextButton.styleFrom(
                       textStyle: TextStyle(fontSize: 15),
@@ -193,10 +172,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       }));
                     },
                   ),
-                ))
-          ],
-        ),
-      )),
+                ),
+              ],
+            ),
+          )),
     );
   }
 

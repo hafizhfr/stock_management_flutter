@@ -28,160 +28,160 @@ class _AddItemScreen extends State<AddItemScreen> {
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference itemCollection = firestore.collection('items');
+    CollectionReference historyCollection = firestore.collection('history');
 
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width;
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.amberAccent,
-          title: Text("Add New Item"),
-        ),
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Flexible(
-                  flex: 3,
-                  child: Container(
-                    color: Colors.grey,
-                    padding: EdgeInsets.all(48),
-                    child: IconButton(
-                      iconSize: 36,
-                      icon: Icon(
-                        Icons.photo_camera_outlined,
-                        color: Colors.white,
-                        size: 36,
-                      ),
+      appBar: AppBar(
+        backgroundColor: Colors.amberAccent,
+        title: Text("Add Item"),
+      ),
+      // resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+          // ClampingScrollPhysics(parent: NeverScrollableScrollPhysics()),
+          // child: Padding(
+          //   padding: const EdgeInsets.all(32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                color: Colors.grey,
+                // padding: EdgeInsets.all(48),
+                child: IconButton(
+                  iconSize: 150,
+                  icon: Icon(
+                    Icons.photo_camera_outlined,
+                    color: Colors.white,
+                    size: 36,
+                  ),
+                  onPressed: () {
+                    //image picker
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                controller: itemNameController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: "Nama Item"),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                controller: itemCountController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: "Jumlah Item"),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              DropDownCategoryWidget(
+                itemCategoryController,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                controller: itemPriceController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    prefixText: "Rp. ",
+                    labelText: "Harga Per Item"),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 50,
+                    width: itemWidth / 3,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.grey),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      side: BorderSide(color: Colors.grey)))),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Simpan',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.save,
+                              color: Colors.black,
+                            )
+                          ]),
                       onPressed: () {
-                        //image picker
+                        if (itemNameController.text.isEmpty ||
+                            itemCountController.text.isEmpty ||
+                            itemPriceController.text.isEmpty ||
+                            itemCategoryController.itemCategory == '') {
+                          Fluttertoast.showToast(
+                            msg:
+                                'Gagal menambahkan barang. Seluruh kolom harus diisi.',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            fontSize: 16.0,
+                          );
+                          setState(() {
+                            _validate = true;
+                          });
+                        } else {
+                          itemCollection.add({
+                            'namaBarang':
+                                StringUtils.capitalize(itemNameController.text),
+                            'jumlahBarang':
+                                int.tryParse(itemCountController.text),
+                            'hargaBarang':
+                                int.tryParse(itemPriceController.text),
+                            'kategori': itemCategoryController.itemCategory,
+                          });
+                          Fluttertoast.showToast(
+                            msg: 'Berhasil menambahkan barang',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            fontSize: 16.0,
+                          );
+                          itemNameController.clear();
+                          itemCountController.clear();
+                          itemPriceController.clear();
+                        }
                       },
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Flexible(
-                    child: TextField(
-                  controller: itemNameController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: "Nama Item"),
-                )),
-                SizedBox(
-                  height: 16,
-                ),
-                Flexible(
-                    child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: itemCountController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: "Jumlah Item"),
-                )),
-                SizedBox(
-                  height: 16,
-                ),
-                Flexible(
-                    child: DropDownCategoryWidget(
-                  itemCategoryController,
-                )),
-                SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Flexible(
-                    child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: itemPriceController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      prefixText: "Rp. ",
-                      labelText: "Harga Per Item"),
-                )),
-                SizedBox(
-                  height: 32,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 50,
-                      width: itemWidth / 3,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.grey),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    side: BorderSide(color: Colors.grey)))),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Simpan',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Icons.save,
-                                color: Colors.black,
-                              )
-                            ]),
-                        onPressed: () {
-                          if (itemNameController.text.isEmpty ||
-                              itemCountController.text.isEmpty ||
-                              itemPriceController.text.isEmpty) {
-                            setState(() {
-                              _validate = true;
-                            });
-                          } else {
-                            itemCollection.add({
-                              'namaBarang': StringUtils.capitalize(
-                                  itemNameController.text),
-                              'jumlahBarang':
-                                  int.tryParse(itemCountController.text),
-                              'hargaBarang':
-                                  int.tryParse(itemPriceController.text),
-                              'kategori': itemCategoryController.itemCategory,
-                            });
-
-                            itemNameController.clear();
-                            itemCountController.clear();
-                            itemPriceController.clear();
-                            Fluttertoast.showToast(
-                                msg: 'Berhasil menambahkan barang baru',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.BOTTOM,
-                                fontSize: 16.0);
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) {
-                            //   _validate = false;
-                            //   return DashBoardScreen();
-                            // }));
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   @override
