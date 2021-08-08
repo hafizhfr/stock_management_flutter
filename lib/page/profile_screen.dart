@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
 
@@ -129,8 +130,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           if (nameController.text.isEmpty ||
                               emailController.text.isEmpty) {
                           } else {
-                            await AuthServices.updateUser(
-                                nameController.text, emailController.text);
+                            Fluttertoast.showToast(
+                                msg: 'Profile berhasil diupdate');
+                            setState(() async {
+                              isEnableTextField = false;
+                              await AuthServices.updateUser(
+                                  nameController.text, emailController.text);
+
+                              ;
+                            });
                           }
                         },
                         child: Text('Update Profile'),
