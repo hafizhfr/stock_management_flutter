@@ -1,15 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
+  final User user;
+  ProfileScreen(this.user);
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isEnableTextField = false;
+  final nameController = new TextEditingController();
+  final emailController = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget.user.displayName;
+    emailController.text = widget.user.email;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       TextField(
                         enabled: isEnableTextField,
-                        // controller: passwordController,
+                        controller: nameController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.person,
@@ -94,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       TextField(
                         enabled: isEnableTextField,
-                        // controller: passwordController,
+                        controller: emailController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email_outlined,
@@ -113,12 +125,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Visibility(
                       visible: isEnableTextField,
                       child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Edit Profile'),
+                        onPressed: () async {
+                          if (nameController.text.isEmpty ||
+                              emailController.text.isEmpty) {
+                          } else {
+                            await AuthServices.updateUser(
+                                nameController.text, emailController.text);
+                          }
+                        },
+                        child: Text('Update Profile'),
                       )),
                   Visibility(
                     visible: !isEnableTextField,
                     child: ElevatedButton(
+                      style: ButtonStyle(),
                       onPressed: () async {
                         await FirebaseAuth.instance.signOut();
                         Navigator.push(

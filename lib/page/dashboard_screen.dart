@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +19,12 @@ Color c = Color(0xff33333F);
 Color d = Color(0xff8E8E93);
 
 class DashBoardScreen extends StatelessWidget {
-  final User user = AuthServices.getUser();
+  final User user;
+  DashBoardScreen(this.user);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Container(
+        child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -37,7 +40,7 @@ class DashBoardScreen extends StatelessWidget {
         ),
       ),
       body: DashboardScreenMobile(),
-    );
+    ));
   }
 }
 
@@ -46,10 +49,10 @@ class DashboardScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
-    final double itemWidth = size.width / 2;
+    // final double itemWidth = size.width / 2;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
+      body: Container(
         child: SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),
           child: Column(

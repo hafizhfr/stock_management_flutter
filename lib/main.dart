@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/page/history.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
@@ -37,10 +39,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
-  final screens = [DashBoardScreen(), HistoryScreen(), ProfileScreen()];
-
   @override
   Widget build(BuildContext context) {
+    final User user = AuthServices.getUser();
+    final screens = [
+      DashBoardScreen(user),
+      HistoryScreen(),
+      ProfileScreen(user)
+    ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,

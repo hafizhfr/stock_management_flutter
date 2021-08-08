@@ -42,6 +42,11 @@ class AuthServices {
     return _auth.currentUser;
   }
 
+  static Future updateUser(String name, String email) async {
+    _auth.currentUser.updateDisplayName(name);
+    _auth.currentUser.updateEmail(email);
+  }
+
   static Future signOut() async {
     await FirebaseAuth.instance.signOut();
   }
