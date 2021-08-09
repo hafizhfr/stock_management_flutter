@@ -56,14 +56,15 @@ class _AllItemScreen extends State<AllItemScreen> {
                             controller: searchController,
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.search
-                              //   icon: Icon(
-                              // Icons.search,
-                              // color: Colors.black,
-                            ),
-                            hintText: "Search...",
-                            )
-                        )),
-                    SizedBox(width: 8,),
+                                  //   icon: Icon(
+                                  // Icons.search,
+                                  // color: Colors.black,
+                                  ),
+                              hintText: "Search...",
+                            ))),
+                    SizedBox(
+                      width: 8,
+                    ),
                     Expanded(child: dropDown()),
                   ],
                 ),
@@ -84,6 +85,6 @@ class _AllItemScreen extends State<AllItemScreen> {
     );
   }
 
-  Widget dropDown() => DropDownCategoryWidget(controller);
+  Widget dropDown() => DropDownCategoryWidget(controller, 1);
   // Widget productCard() => ProductCardWidget();
 }

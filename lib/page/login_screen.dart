@@ -24,8 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemWidth = size.width - 64;
+    // var size = MediaQuery.of(context).size;
+    // final double itemWidth = size.width - 64;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                   height: 50,
-                  width: itemWidth,
+                  width: 300,
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:

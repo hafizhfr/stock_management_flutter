@@ -21,26 +21,28 @@ Color d = Color(0xff8E8E93);
 class DashBoardScreen extends StatelessWidget {
   final User user;
   DashBoardScreen(this.user);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.amber,
-        elevation: 0,
-        title: Text(
-          'Welcome, ${user.displayName}',
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Poppins',
-            fontSize: 20,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.amber,
+          elevation: 0,
+          title: Text(
+            'Welcome, ${user.displayName}',
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Poppins',
+              fontSize: 20,
+            ),
           ),
         ),
+        body: DashboardScreenMobile(),
       ),
-      body: DashboardScreenMobile(),
-    ));
+    );
   }
 }
 

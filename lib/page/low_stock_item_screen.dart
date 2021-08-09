@@ -77,6 +77,6 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
     );
   }
 
-  Widget dropDown() => DropDownCategoryWidget(controller);
+  Widget dropDown() => DropDownCategoryWidget(controller, 1);
   // Widget productCard() => ProductCardWidget();
 }

@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:basic_utils/basic_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/history_db.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 
@@ -18,6 +21,7 @@ class _AddItemScreen extends State<AddItemScreen> {
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
+  final User user = AuthServices.getUser();
 
   ItemCategoryController itemCategoryController =
       ItemCategoryController(itemCategory: 'Makanan');
@@ -87,9 +91,7 @@ class _AddItemScreen extends State<AddItemScreen> {
               SizedBox(
                 height: 15,
               ),
-              DropDownCategoryWidget(
-                itemCategoryController,
-              ),
+              DropDownCategoryWidget(itemCategoryController, 1),
               SizedBox(
                 height: 15,
               ),
@@ -162,6 +164,10 @@ class _AddItemScreen extends State<AddItemScreen> {
                                 int.tryParse(itemPriceController.text),
                             'kategori': itemCategoryController.itemCategory,
                           });
+
+                          HistoryCollection.addToDB(
+                              itemNameController.text, user.displayName, 1);
+
                           Fluttertoast.showToast(
                             msg: 'Berhasil menambahkan barang',
                             toastLength: Toast.LENGTH_LONG,
@@ -192,5 +198,5 @@ class _AddItemScreen extends State<AddItemScreen> {
     super.dispose();
   }
 
-  Widget dropDown() => DropDownCategoryWidget(itemCategoryController);
+  Widget dropDown() => DropDownCategoryWidget(itemCategoryController, 1);
 }

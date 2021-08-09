@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
 import 'package:stock_management_flutter/main.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
-import 'package:stock_management_flutter/page/history.dart';
+import 'package:stock_management_flutter/page/history_screen.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
 
 var fontFamily = 'Poppins';

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class DropDownCategoryWidget extends StatefulWidget {
   final ItemCategoryController controller;
+  final int screenType;
 
-  DropDownCategoryWidget(this.controller);
+  DropDownCategoryWidget(this.controller, this.screenType);
   @override
   _DropDownCategoryWidget createState() => _DropDownCategoryWidget();
 }
@@ -93,5 +94,5 @@ class _DropDownCategoryWidget extends State<DropDownCategoryWidget> {
 class ItemCategoryController {
   String itemCategory;
 
-  ItemCategoryController({this.itemCategory = ''});
+  ItemCategoryController({this.itemCategory});
 }
