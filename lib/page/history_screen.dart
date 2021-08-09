@@ -17,6 +17,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         actions: [],
         backgroundColor: Colors.amber,
         title: Text('History'),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Container(
