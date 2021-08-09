@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthServices {
   static FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static Future signUp(String fullName, String email, String password) async {
+  static Future<User> signUp(
+      String fullName, String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
+      user.updateDisplayName(fullName);
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -21,7 +23,7 @@ class AuthServices {
     }
   }
 
-  static Future signIn(String email, String password) async {
+  static Future<User> signIn(String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -29,14 +31,25 @@ class AuthServices {
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        print('Akun tidak ditemukan.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        print('Password salah.');
       }
     }
+  }
+
+  static User getUser() {
+    return _auth.currentUser;
+  }
+
+  static Future updateUser(String name, String email) async {
+    _auth.currentUser.updateDisplayName(name);
+    _auth.currentUser.updateEmail(email);
   }
 
   static Future signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+  static Stream<User> get firebaseUserStream => _auth.authStateChanges();
 }

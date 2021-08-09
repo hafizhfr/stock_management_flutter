@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/main.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/page/history.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
@@ -107,10 +108,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           } else {
                             await AuthServices.signUp(nameController.text,
                                 emailController.text, passwordController.text);
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return DashBoardScreen();
-                            }));
+                            //zzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+                            User user = AuthServices.getUser();
+                            print(user.uid);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return MyHomePage();
+                                },
+                              ),
+                            );
                           }
                         },
                       ),

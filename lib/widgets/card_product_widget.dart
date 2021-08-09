@@ -74,8 +74,10 @@ class _ProductCardWidget extends State<ProductCardWidget> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          EditItemScreen(widget.productName)));
+                                      builder: (context) => EditItemScreen(
+                                          widget.productName,
+                                          widget.productPrice,
+                                          widget.productStock)));
                             }),
                         IconButton(
                             icon: Icon(Icons.delete),

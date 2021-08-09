@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stock_management_flutter/main.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 
 class CartScreen extends StatefulWidget {
@@ -156,20 +157,23 @@ class _CartScreenState extends State<CartScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             Expanded(
-              flex: 1,
+                flex: 1,
                 child: Container(
                   height: 50,
                   width: size.width * 2 / 3,
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.amber),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.grey)))),
+                            MaterialStateProperty.all<Color>(Colors.amber),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.grey)))),
                     child: Text(
                       'CONFIRM',
                       style: TextStyle(
@@ -186,8 +190,8 @@ class _CartScreenState extends State<CartScreen> {
                           fontSize: 16.0);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return DashBoardScreen();
-                          }));
+                        return MyHomePage();
+                      }));
                     },
                   ),
                 ))
