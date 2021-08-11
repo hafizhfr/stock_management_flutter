@@ -29,10 +29,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "PROFILE",
+          "Profile",
           style: TextStyle(fontSize: 18.0),
         ),
         backgroundColor: Colors.amber,
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -146,7 +147,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Visibility(
                     visible: !isEnableTextField,
                     child: ElevatedButton(
-                      style: ButtonStyle(),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red)),
                       onPressed: () async {
                         await FirebaseAuth.instance.signOut();
                         Navigator.push(

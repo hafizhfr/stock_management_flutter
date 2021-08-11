@@ -24,38 +24,40 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         shrinkWrap: true,
         children: [
           StreamBuilder<QuerySnapshot>(
-              stream: !widget.isLowStockPage
-                  ? widget.searchQuery == ''
-                      ? itemCollection.orderBy('namaBarang').snapshots()
-                      : itemCollection
-                          .where('namaBarang',
-                              isGreaterThanOrEqualTo: widget.searchQuery)
-                          .orderBy('namaBarang')
-                          .snapshots()
-                  : widget.searchQuery == ''
-                      ? itemCollection
-                          .where('jumlahBarang', isLessThanOrEqualTo: 5)
-                          .snapshots()
-                      : itemCollection
-                          .where('jumlahBarang', isLessThanOrEqualTo: 5)
-                          // .where('namaBarang',
-                          //     isGreaterThanOrEqualTo: widget.searchQuery)
-                          .snapshots(),
-              builder: (_, snapshot) {
-                if (snapshot.hasData) {
-                  return Column(
-                    children: snapshot.data.docs.map((document) {
-                      return ProductCardWidget(
-                          'imgTemp',
-                          document['namaBarang'],
-                          document['hargaBarang'],
-                          document['jumlahBarang']);
-                    }).toList(),
-                  );
-                } else {
-                  return CircularProgressIndicator();
-                }
-              })
+            stream: !widget.isLowStockPage
+                ? widget.searchQuery == ''
+                    ? itemCollection.orderBy('namaBarang').snapshots()
+                    : itemCollection
+                        .where('namaBarang',
+                            isGreaterThanOrEqualTo: widget.searchQuery)
+                        .orderBy('namaBarang')
+                        .snapshots()
+                : widget.searchQuery == ''
+                    ? itemCollection
+                        .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                        .snapshots()
+                    : itemCollection
+                        .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                        // .where('namaBarang',
+                        //     isGreaterThanOrEqualTo: widget.searchQuery)
+                        .snapshots(),
+            builder: (_, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: snapshot.data.docs.map((document) {
+                    return ProductCardWidget(
+                        'imgTemp',
+                        document['namaBarang'],
+                        document['kategori'],
+                        document['hargaBarang'],
+                        document['jumlahBarang']);
+                  }).toList(),
+                );
+              } else {
+                return CircularProgressIndicator();
+              }
+            },
+          ),
         ],
       ),
       // ),

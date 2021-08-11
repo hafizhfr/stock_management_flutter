@@ -1,19 +1,24 @@
 import 'dart:io';
 import 'package:basic_utils/basic_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/history_db.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 
 class EditItemScreen extends StatefulWidget {
   final String productName;
+  final String productCategory;
   final int productPrice;
   final int productStock;
 
-  EditItemScreen(this.productName, this.productPrice, this.productStock);
+  EditItemScreen(this.productName, this.productCategory, this.productPrice,
+      this.productStock);
   @override
   _EditItemScreen createState() => _EditItemScreen();
 }
@@ -23,19 +28,18 @@ class _EditItemScreen extends State<EditItemScreen> {
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
+  final User user = AuthServices.getUser();
 
   bool _validate = false;
 
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference itemCollection = firestore.collection('items');
     //set initial value
     itemNameController.text = widget.productName;
     itemPriceController.text = widget.productPrice.toString();
     itemCountController.text = widget.productStock.toString();
     ItemCategoryController itemCategoryController =
-        ItemCategoryController(itemCategory: '');
+        ItemCategoryController(itemCategory: widget.productCategory);
 
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width;
@@ -94,9 +98,7 @@ class _EditItemScreen extends State<EditItemScreen> {
               SizedBox(
                 height: 15,
               ),
-              DropDownCategoryWidget(
-                itemCategoryController,
-              ),
+              DropDownCategoryWidget(itemCategoryController, 2),
               SizedBox(
                 height: 15,
               ),
@@ -156,9 +158,9 @@ class _EditItemScreen extends State<EditItemScreen> {
                             gravity: ToastGravity.BOTTOM,
                             fontSize: 16.0,
                           );
-                          setState(() {
-                            _validate = true;
-                          });
+                          // setState(() {
+                          //   _validate = true;
+                          // });
                         } else {
                           _updateItem(
                               widget.productName,
@@ -166,15 +168,10 @@ class _EditItemScreen extends State<EditItemScreen> {
                               int.tryParse(itemCountController.text),
                               int.tryParse(itemPriceController.text),
                               itemCategoryController.itemCategory);
-                          // itemCollection.doc().update({
-                          //   'namaBarang': StringUtils.capitalize(
-                          //       itemNameController.text),
-                          //   'jumlahBarang':
-                          //       int.tryParse(itemCountController.text),
-                          //   'hargaBarang':
-                          //       int.tryParse(itemPriceController.text),
-                          //   'kategori': itemCategoryController.itemCategory,
-                          // });
+
+                          HistoryCollection.addToDB(
+                              itemNameController.text, user.displayName, 2);
+
                           Fluttertoast.showToast(
                             msg: 'Berhasil mengupdate barang',
                             toastLength: Toast.LENGTH_LONG,

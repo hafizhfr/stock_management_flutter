@@ -1,23 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/history_db.dart';
 import 'package:stock_management_flutter/page/edit_item_screen.dart';
 import 'package:stock_management_flutter/widgets/alert_dialog_widget.dart';
 
 class ProductCardWidget extends StatefulWidget {
   final String productImg;
   final String productName;
+  final String productCategory;
   final int productPrice;
   final int productStock;
-  ProductCardWidget(
-      this.productImg, this.productName, this.productPrice, this.productStock);
+  ProductCardWidget(this.productImg, this.productName, this.productCategory,
+      this.productPrice, this.productStock);
   @override
   _ProductCardWidget createState() => _ProductCardWidget();
 }
 
 class _ProductCardWidget extends State<ProductCardWidget> {
   AlertDialogController alertController = AlertDialogController();
+  final User user = AuthServices.getUser();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,6 +81,7 @@ class _ProductCardWidget extends State<ProductCardWidget> {
                                   MaterialPageRoute(
                                       builder: (context) => EditItemScreen(
                                           widget.productName,
+                                          widget.productCategory,
                                           widget.productPrice,
                                           widget.productStock)));
                             }),
@@ -99,6 +105,9 @@ class _ProductCardWidget extends State<ProductCardWidget> {
                                       gravity: ToastGravity.BOTTOM,
                                       fontSize: 16.0);
                                 });
+
+                                HistoryCollection.addToDB(
+                                    widget.productName, user.displayName, 3);
                               }
                             }),
                       ],
