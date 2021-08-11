@@ -30,7 +30,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: Text(
           "Profile",
-          style: TextStyle(fontSize: 18.0),
         ),
         backgroundColor: Colors.amber,
         automaticallyImplyLeading: false,
@@ -101,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           hintText: "Full Name",
                           // errorText: _validate ? 'Password Can\'t Be Empty' : null,
                         ),
-                        style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: Theme.of(context).textTheme.headline6
                       ),
                       SizedBox(
                         height: 15,
@@ -117,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           hintText: "xxxxx@mail.com",
                           // errorText: _validate ? 'Password Can\'t Be Empty' : null,
                         ),
-                        style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: Theme.of(context).textTheme.headline6
                       ),
                     ],
                   ),

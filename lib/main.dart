@@ -8,6 +8,7 @@ import 'package:stock_management_flutter/page/history_screen.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
 import 'package:stock_management_flutter/page/profile_screen.dart';
 import 'package:stock_management_flutter/page/register_screen.dart';
+import 'package:stock_management_flutter/widgets/styles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,13 +17,31 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Stock Management',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+
+        primaryColor: primary,
+        accentColor: secondary,
+        scaffoldBackgroundColor: Colors.white,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                primary: secondary,
+                textStyle: TextStyle(fontSize: 20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(0))))),
+        buttonTheme: ButtonThemeData(
+          buttonColor: primary,
+          textTheme: ButtonTextTheme.primary,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        textTheme: myTextTheme.apply(
+            bodyColor: Colors.black, displayColor: Colors.black),
       ),
       home: MyHomePage(title: 'Stock Management Home'),
     );
@@ -40,6 +59,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final User user = AuthServices.getUser();

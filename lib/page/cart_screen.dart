@@ -33,28 +33,28 @@ class _CartScreenState extends State<CartScreen> {
                   Expanded(
                       child: Text(
                     "Item Name",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .apply(color: Colors.grey),
                     textAlign: TextAlign.start,
                   )),
                   Expanded(
                       child: Text(
                     "QTY",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .apply(color: Colors.grey),
                     textAlign: TextAlign.center,
                   )),
                   Expanded(
                       child: Text(
                     "Amount",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .apply(color: Colors.grey),
                     textAlign: TextAlign.center,
                   )),
                 ],
@@ -66,6 +66,7 @@ class _CartScreenState extends State<CartScreen> {
             Expanded(
               flex: 8,
               child: ListView.builder(
+                shrinkWrap: true,
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return Column(
@@ -77,30 +78,20 @@ class _CartScreenState extends State<CartScreen> {
                           Expanded(
                             child: Text(
                               "name",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                              style: Theme.of(context).textTheme.bodyText1,
                               textAlign: TextAlign.start,
                             ),
                           ),
                           Expanded(
                               child: Text(
                             "qty",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                            style: Theme.of(context).textTheme.bodyText1,
                             textAlign: TextAlign.center,
                           )),
                           Expanded(
                               child: Text(
                             "Rp. amount",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                            style: Theme.of(context).textTheme.bodyText1,
                             textAlign: TextAlign.end,
                           )),
                         ],
@@ -139,19 +130,13 @@ class _CartScreenState extends State<CartScreen> {
                   Expanded(
                       child: Text(
                     "Total",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                    style: Theme.of(context).textTheme.bodyText1,
                     textAlign: TextAlign.center,
                   )),
                   Expanded(
                       child: Text(
                     "Rp. 300.000",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                    style: Theme.of(context).textTheme.bodyText1,
                     textAlign: TextAlign.end,
                   )),
                 ],
@@ -177,7 +162,6 @@ class _CartScreenState extends State<CartScreen> {
                     child: Text(
                       'CONFIRM',
                       style: TextStyle(
-                          fontFamily: fontFamily,
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),

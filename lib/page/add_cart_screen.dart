@@ -45,9 +45,7 @@ class _AddToCartScreen extends State<AddToCartScreen> {
               children: <Widget>[
                 Text(
                   "Nama Item",
-                  style: TextStyle(
-                    fontSize: 16
-                  ),
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 SizedBox(height: 8,),
                 Flexible(
@@ -59,9 +57,7 @@ class _AddToCartScreen extends State<AddToCartScreen> {
                 ),
                 Text(
                   "Jumlah Item",
-                  style: TextStyle(
-                      fontSize: 16
-                  ),
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 SizedBox(height: 8,),
                 Flexible(
@@ -82,8 +78,6 @@ class _AddToCartScreen extends State<AddToCartScreen> {
                       width: itemWidth / 2,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.grey),
                             shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(

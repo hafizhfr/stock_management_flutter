@@ -12,12 +12,6 @@ import 'package:stock_management_flutter/page/register_screen.dart';
 import 'package:stock_management_flutter/widgets/card_product_widget.dart';
 import 'package:stock_management_flutter/widgets/item_list_widget.dart';
 
-var fontFamily = 'Poppins';
-Color a = Color(0xff25C266);
-Color b = Color(0xff37dc9a);
-Color c = Color(0xff33333F);
-Color d = Color(0xff8E8E93);
-
 class DashBoardScreen extends StatelessWidget {
   final User user;
   DashBoardScreen(this.user);
@@ -33,11 +27,7 @@ class DashBoardScreen extends StatelessWidget {
           elevation: 0,
           title: Text(
             'Welcome, ${user.displayName}',
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Poppins',
-              fontSize: 20,
-            ),
+            style: Theme.of(context).textTheme.headline6,
           ),
         ),
         body: DashboardScreenMobile(),
@@ -91,7 +81,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                 Text(
                                   "Total Sales",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 16),
+                                  style: Theme.of(context).textTheme.subtitle1,
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -99,9 +89,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                 Text(
                                   "Rp.1.000.000",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
+                                  style: Theme.of(context).textTheme.subtitle2,
                                 )
                               ],
                             )),
@@ -116,7 +104,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                   Text(
                                     "Stock In",
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 16),
+                                    style: Theme.of(context).textTheme.subtitle1,
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -124,9 +112,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                   Text(
                                     "200",
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
+                                    style: Theme.of(context).textTheme.headline5,
                                   )
                                 ],
                               ),
@@ -142,7 +128,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                   Text(
                                     "Stock Out",
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 16),
+                                    style: Theme.of(context).textTheme.subtitle1,
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -150,9 +136,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                   Text(
                                     "150",
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
+                                    style: Theme.of(context).textTheme.headline5,
                                   )
                                 ],
                               ),
@@ -172,8 +156,7 @@ class DashboardScreenMobile extends StatelessWidget {
                     Text(
                       "Quick Actions",
                       textAlign: TextAlign.left,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                     SizedBox(
                       height: 16,
@@ -210,7 +193,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                         }),
                                     Text(
                                       "Add Item",
-                                      style: TextStyle(fontSize: 16),
+                                      style: Theme.of(context).textTheme.subtitle1,
                                     )
                                   ],
                                 ),
@@ -245,7 +228,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                         }),
                                     Text(
                                       "Sell",
-                                      style: TextStyle(fontSize: 16),
+                                      style: Theme.of(context).textTheme.subtitle1,
                                     )
                                   ],
                                 ),
@@ -280,7 +263,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                         }),
                                     Text(
                                       "Low Stock",
-                                      style: TextStyle(fontSize: 16),
+                                      style: Theme.of(context).textTheme.subtitle1,
                                     )
                                   ],
                                 ),
@@ -297,8 +280,7 @@ class DashboardScreenMobile extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           "Products",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                         TextButton(
                             onPressed: () {
@@ -309,7 +291,7 @@ class DashboardScreenMobile extends StatelessWidget {
                             },
                             child: Text(
                               "View All",
-                              style: TextStyle(fontSize: 18),
+                              style: Theme.of(context).textTheme.headline6.apply(color: Colors.blue),
                               textAlign: TextAlign.right,
                             ))
                       ],

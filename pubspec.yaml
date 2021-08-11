@@ -35,6 +35,7 @@ dependencies:
   fluttertoast: ^8.0.8
   basic_utils: ^3.4.0
   intl: ^0.17.0
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
