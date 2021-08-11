@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/dashboard_item_status_db.dart';
 import 'package:stock_management_flutter/firebase_config/history_db.dart';
 import 'package:stock_management_flutter/page/edit_item_screen.dart';
 import 'package:stock_management_flutter/widgets/alert_dialog_widget.dart';
@@ -108,6 +109,9 @@ class _ProductCardWidget extends State<ProductCardWidget> {
 
                                 HistoryCollection.addToDB(
                                     widget.productName, user.displayName, 3);
+
+                                ItemStatus.updateTotalStock(
+                                    widget.productStock, 2);
                               }
                             }),
                       ],

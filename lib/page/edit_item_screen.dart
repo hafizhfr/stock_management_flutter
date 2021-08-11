@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/dashboard_item_status_db.dart';
 import 'package:stock_management_flutter/firebase_config/history_db.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
@@ -185,6 +186,13 @@ class _EditItemScreen extends State<EditItemScreen> {
                               gravity: ToastGravity.BOTTOM,
                               fontSize: 16.0,
                             );
+
+                            widget.productStock >
+                                    int.tryParse(itemCountController.text)
+                                ? ItemStatus.updateTotalStock(
+                                    int.tryParse(itemCountController.text), 1)
+                                : ItemStatus.updateTotalStock(
+                                    int.tryParse(itemCountController.text), 0);
                           });
                         }
                       },

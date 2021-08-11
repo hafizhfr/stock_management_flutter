@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/dashboard_item_status_db.dart';
 import 'package:stock_management_flutter/page/add_cart_screen.dart';
 import 'package:stock_management_flutter/page/add_item_screen.dart';
 import 'package:stock_management_flutter/page/all_item_screen.dart';
@@ -119,11 +120,16 @@ class DashboardScreenMobile extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                "200",
-                                textAlign: TextAlign.center,
+                                ItemStatus.getCurrentStock().toString(),
                                 style: TextStyle(
                                     fontSize: 24, fontWeight: FontWeight.bold),
-                              )
+                              ),
+                              // Text(
+                              //   "200",
+                              //   textAlign: TextAlign.center,
+                              //   style: TextStyle(
+                              //       fontSize: 24, fontWeight: FontWeight.bold),
+                              // ),
                             ],
                           ),
                         ),

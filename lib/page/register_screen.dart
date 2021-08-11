@@ -108,17 +108,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           } else {
                             await AuthServices.signUp(nameController.text,
                                 emailController.text, passwordController.text);
-                            //zzzzzzzzzzzzzzzzzzzzzzzzzzzzz
-                            User user = AuthServices.getUser();
-                            print(user.uid);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return MyHomePage();
-                                },
-                              ),
-                            );
+                            await AuthServices.signIn(
+                                emailController.text, passwordController.text);
                           }
                         },
                       ),
