@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthServices {
   static FirebaseAuth _auth = FirebaseAuth.instance;
@@ -10,12 +11,13 @@ class AuthServices {
           email: email, password: password);
       User user = result.user;
       user.updateDisplayName(fullName);
+      Fluttertoast.showToast(msg: 'Berhasil membuat akun baru.');
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        Fluttertoast.showToast(msg: 'Password terlalu lemah.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        Fluttertoast.showToast(msg: 'Alamat email sudah digunakan akun lain.');
       }
     } catch (e) {
       print(e.toString());
@@ -31,9 +33,9 @@ class AuthServices {
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('Akun tidak ditemukan.');
+        Fluttertoast.showToast(msg: 'Akun tidak ditemukan.');
       } else if (e.code == 'wrong-password') {
-        print('Password salah.');
+        Fluttertoast.showToast(msg: 'Password salah.');
       }
     }
   }

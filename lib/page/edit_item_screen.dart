@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/dashboard_item_status_db.dart';
 import 'package:stock_management_flutter/firebase_config/history_db.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
@@ -29,18 +30,24 @@ class _EditItemScreen extends State<EditItemScreen> {
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
+  var itemCategoryController = ItemCategoryController();
   final User user = AuthServices.getUser();
 
   bool _validate = false;
 
   @override
-  Widget build(BuildContext context) {
-    //set initial value
+  void initState() {
+    super.initState();
     itemNameController.text = widget.productName;
     itemPriceController.text = widget.productPrice.toString();
     itemCountController.text = widget.productStock.toString();
-    ItemCategoryController itemCategoryController =
+    itemCategoryController =
         ItemCategoryController(itemCategory: widget.productCategory);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //set initial value
 
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width;
@@ -157,26 +164,35 @@ class _EditItemScreen extends State<EditItemScreen> {
                             gravity: ToastGravity.BOTTOM,
                             fontSize: 16.0,
                           );
-                          // setState(() {
-                          //   _validate = true;
-                          // });
+                          setState(() {
+                            _validate = true;
+                          });
                         } else {
-                          _updateItem(
-                              widget.productName,
-                              itemNameController.text,
-                              int.tryParse(itemCountController.text),
-                              int.tryParse(itemPriceController.text),
-                              itemCategoryController.itemCategory);
+                          setState(() {
+                            _updateItem(
+                                widget.productName,
+                                itemNameController.text,
+                                int.tryParse(itemCountController.text),
+                                int.tryParse(itemPriceController.text),
+                                itemCategoryController.itemCategory);
 
-                          HistoryCollection.addToDB(
-                              itemNameController.text, user.displayName, 2);
+                            HistoryCollection.addToDB(
+                                itemNameController.text, user.displayName, 2);
 
-                          Fluttertoast.showToast(
-                            msg: 'Berhasil mengupdate barang',
-                            toastLength: Toast.LENGTH_LONG,
-                            gravity: ToastGravity.BOTTOM,
-                            fontSize: 16.0,
-                          );
+                            Fluttertoast.showToast(
+                              msg: 'Berhasil mengupdate barang',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              fontSize: 16.0,
+                            );
+
+                            widget.productStock >
+                                    int.tryParse(itemCountController.text)
+                                ? ItemStatus.updateTotalStock(
+                                    int.tryParse(itemCountController.text), 1)
+                                : ItemStatus.updateTotalStock(
+                                    int.tryParse(itemCountController.text), 0);
+                          });
                         }
                       },
                     ),

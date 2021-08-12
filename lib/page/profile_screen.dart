@@ -151,14 +151,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               MaterialStateProperty.all(Colors.red)),
                       onPressed: () async {
                         await FirebaseAuth.instance.signOut();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return LoginScreen();
-                            },
-                          ),
-                        );
                       },
                       child: Text('Logout'),
                     ),

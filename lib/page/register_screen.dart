@@ -88,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: 40,
                       ),
+
                       Container(
                           height: 50,
                           width: 300,
@@ -131,6 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                             },
                           )),
+                      
                       TextButton(
                         style: TextButton.styleFrom(
                           textStyle: const TextStyle(fontSize: 15),

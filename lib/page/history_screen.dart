@@ -28,6 +28,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             children: [
               StreamBuilder<QuerySnapshot>(
                 stream: HistoryCollection.collection
+                    .orderBy('tanggal', descending: true)
                     .orderBy('waktu', descending: true)
                     .snapshots(),
                 builder: (_, snapshot) {
@@ -42,9 +43,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ));
                       }).toList(),
                     );
-                  } else {
-                    return CircularProgressIndicator();
                   }
+                  return CircularProgressIndicator();
                 },
               )
             ],

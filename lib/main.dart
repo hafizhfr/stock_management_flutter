@@ -62,53 +62,54 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = AuthServices.getUser();
-    final screens = [
-      DashBoardScreen(user),
-      HistoryScreen(),
-      ProfileScreen(user)
-    ];
-
-    if (user == null) {
-      Fluttertoast.showToast(msg: 'Anda harus login terlebih dahulu.');
-      return LoginScreen();
-    } else {
-      return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          fixedColor: Colors.amber,
-          currentIndex: 0,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          iconSize: 36,
-          items: [
-            BottomNavigationBarItem(
-                icon: new Icon(
-                  Icons.home,
-                  color: Colors.amber,
-                ),
-                label: "Home"),
-            BottomNavigationBarItem(
-                icon: new Icon(
-                  Icons.history,
-                  color: Colors.amber,
-                ),
-                label: "History"),
-            BottomNavigationBarItem(
-                icon: new Icon(
-                  Icons.account_circle_rounded,
-                  color: Colors.amber,
-                ),
-                label: "Profile")
-          ],
-          onTap: onTabTapped,
-        ),
-        body: IndexedStack(
-          index: currentIndex,
-          children: screens,
-        ),
-      );
-    }
+    return StreamBuilder(
+      stream: AuthServices.firebaseUserStream,
+      builder: (context, AsyncSnapshot<User> snapshot) {
+        if (snapshot.hasData) {
+          final screens = [
+            DashBoardScreen(snapshot.data),
+            HistoryScreen(),
+            ProfileScreen(snapshot.data)
+          ];
+          return Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: Colors.white,
+              fixedColor: Colors.amber,
+              currentIndex: 0,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              iconSize: 36,
+              items: [
+                BottomNavigationBarItem(
+                    icon: new Icon(
+                      Icons.home,
+                      color: Colors.amber,
+                    ),
+                    label: "Home"),
+                BottomNavigationBarItem(
+                    icon: new Icon(
+                      Icons.history,
+                      color: Colors.amber,
+                    ),
+                    label: "History"),
+                BottomNavigationBarItem(
+                    icon: new Icon(
+                      Icons.account_circle_rounded,
+                      color: Colors.amber,
+                    ),
+                    label: "Profile")
+              ],
+              onTap: onTabTapped,
+            ),
+            body: IndexedStack(
+              index: currentIndex,
+              children: screens,
+            ),
+          );
+        }
+        return LoginScreen();
+      },
+    );
   }
 
   void onTabTapped(int index) {

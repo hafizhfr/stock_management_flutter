@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
+import 'package:stock_management_flutter/firebase_config/dashboard_item_status_db.dart';
 import 'package:stock_management_flutter/page/add_cart_screen.dart';
 import 'package:stock_management_flutter/page/add_item_screen.dart';
 import 'package:stock_management_flutter/page/all_item_screen.dart';
@@ -143,7 +144,60 @@ class DashboardScreenMobile extends StatelessWidget {
                             )
                           ],
                         ),
-                      ))
+
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                "Stock In",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                ItemStatus.getCurrentStock().toString(),
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.bold),
+                              ),
+                              // Text(
+                              //   "200",
+                              //   textAlign: TextAlign.center,
+                              //   style: TextStyle(
+                              //       fontSize: 24, fontWeight: FontWeight.bold),
+                              // ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 2,
+                          height: 48,
+                          color: Colors.amber,
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                "Stock Out",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "150",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
               Padding(
