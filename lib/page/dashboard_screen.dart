@@ -64,23 +64,46 @@ class DashboardScreenMobile extends StatelessWidget {
                             BorderRadius.vertical(bottom: Radius.circular(32))),
                   ),
                   Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 8),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 32),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(4)),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 32),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Total Sales",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Rp.1.000.000",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.subtitle2,
+                              )
+                            ],
+                          )),
+                          Container(
+                            width: 2,
+                            height: 48,
+                            color: Colors.amber,
+                          ),
+                          Expanded(
+                            child: Column(
                               children: <Widget>[
                                 Text(
-                                  "Total Sales",
+                                  "Stock In",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.subtitle1,
                                 ),
@@ -88,116 +111,41 @@ class DashboardScreenMobile extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Text(
-                                  "Rp.1.000.000",
+                                  ItemStatus.getCurrentStock().toString(),
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.subtitle2,
+                                  style: Theme.of(context).textTheme.headline5,
                                 )
                               ],
-                            )),
-                            Container(
-                              width: 2,
-                              height: 48,
-                              color: Colors.amber,
                             ),
-                            Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Stock In",
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "200",
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.headline5,
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 2,
-                              height: 48,
-                              color: Colors.amber,
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Stock Out",
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "150",
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.headline5,
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Stock In",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                ItemStatus.getCurrentStock().toString(),
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
-                              ),
-                              // Text(
-                              //   "200",
-                              //   textAlign: TextAlign.center,
-                              //   style: TextStyle(
-                              //       fontSize: 24, fontWeight: FontWeight.bold),
-                              // ),
-                            ],
                           ),
-                        ),
-                        Container(
-                          width: 2,
-                          height: 48,
-                          color: Colors.amber,
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Stock Out",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "150",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
-                              )
-                            ],
+                          Container(
+                            width: 2,
+                            height: 48,
+                            color: Colors.amber,
                           ),
-                        )
-                      ],
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  "Stock Out",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "150",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline5,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
               Padding(
@@ -247,7 +195,8 @@ class DashboardScreenMobile extends StatelessWidget {
                                         }),
                                     Text(
                                       "Add Item",
-                                      style: Theme.of(context).textTheme.subtitle1,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle1,
                                     )
                                   ],
                                 ),
@@ -282,7 +231,8 @@ class DashboardScreenMobile extends StatelessWidget {
                                         }),
                                     Text(
                                       "Sell",
-                                      style: Theme.of(context).textTheme.subtitle1,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle1,
                                     )
                                   ],
                                 ),
@@ -317,7 +267,8 @@ class DashboardScreenMobile extends StatelessWidget {
                                         }),
                                     Text(
                                       "Low Stock",
-                                      style: Theme.of(context).textTheme.subtitle1,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle1,
                                     )
                                   ],
                                 ),
@@ -345,7 +296,10 @@ class DashboardScreenMobile extends StatelessWidget {
                             },
                             child: Text(
                               "View All",
-                              style: Theme.of(context).textTheme.headline6.apply(color: Colors.blue),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .apply(color: Colors.blue),
                               textAlign: TextAlign.right,
                             ))
                       ],
