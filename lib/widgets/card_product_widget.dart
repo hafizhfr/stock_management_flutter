@@ -52,19 +52,19 @@ class _ProductCardWidget extends State<ProductCardWidget> {
                         Text(
                           // "Product Name",
                           widget.productName,
-                          style: TextStyle(fontSize: 14),
+                          style: Theme.of(context).textTheme.bodyText2,
                           textAlign: TextAlign.start,
                         ),
                         Text(
                           // "Price",
                           'Rp ' + widget.productPrice.toString(),
-                          style: TextStyle(fontSize: 14),
+                          style: Theme.of(context).textTheme.bodyText2,
                           textAlign: TextAlign.start,
                         ),
                         Text(
                           // "Stock",
                           'Stok: ' + widget.productStock.toString(),
-                          style: TextStyle(fontSize: 14),
+                          style: Theme.of(context).textTheme.bodyText2,
                           textAlign: TextAlign.start,
                         ),
                       ],

@@ -40,11 +40,8 @@ class _AddItemScreen extends State<AddItemScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amberAccent,
         title: Text("Add Item"),
       ),
-      // resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(
@@ -115,8 +112,6 @@ class _AddItemScreen extends State<AddItemScreen> {
                     width: itemWidth / 3,
                     child: ElevatedButton(
                       style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.grey),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -127,17 +122,13 @@ class _AddItemScreen extends State<AddItemScreen> {
                           children: <Widget>[
                             Text(
                               'Simpan',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                              ),
+
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             Icon(
                               Icons.save,
-                              color: Colors.black,
                             )
                           ]),
                       onPressed: () {

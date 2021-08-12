@@ -21,7 +21,7 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Item'),
+        title: Text('Low Stock'),
         backgroundColor: Colors.amber,
       ),
       floatingActionButton: FloatingActionButton(
@@ -53,10 +53,10 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
                             },
                             controller: searchController,
                             decoration: InputDecoration(
-                                icon: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                            )))),
+                              prefixIcon: Icon(Icons.search
+                              ),
+                              hintText: "Search...",
+                            ))),
                     Expanded(child: dropDown()),
                   ],
                 ),

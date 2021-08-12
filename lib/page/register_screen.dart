@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
 import 'package:stock_management_flutter/main.dart';
-import 'package:stock_management_flutter/page/dashboard_screen.dart';
-import 'package:stock_management_flutter/page/history_screen.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
+import 'package:stock_management_flutter/widgets/styles.dart';
 
 var fontFamily = 'Poppins';
 Color a = Colors.grey;
@@ -52,18 +51,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Text(
                             "Create Account",
-                            style: TextStyle(
-                              fontSize: 38,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.headline3,
                             textAlign: TextAlign.start,
                           ),
                           Text(
                             "Sign up to get started",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .apply(color: Colors.grey),
                           ),
                         ],
                       ),
@@ -74,45 +70,69 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             inputText(
-                                label: 'Full Name',
+                                hint: 'Full Name',
                                 formController: nameController),
+                            SizedBox(
+                              height: 16,
+                            ),
                             inputText(
-                                label: 'Email',
-                                formController: emailController),
+                                hint: 'Email', formController: emailController),
+                            SizedBox(
+                              height: 16,
+                            ),
                             inputText(
-                                label: 'Password',
+                                hint: 'Password',
                                 obscureText: true,
                                 formController: passwordController),
                           ]),
                       SizedBox(
                         height: 40,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: b),
-                        child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                                fontFamily: fontFamily,
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (nameController.text.isEmpty) {
-                            setState(() {
-                              _validate = true;
-                            });
-                          } else {
-                            await AuthServices.signUp(nameController.text,
-                                emailController.text, passwordController.text);
-                            await AuthServices.signIn(
-                                emailController.text, passwordController.text);
-                          }
-                        },
-                      ),
+
+                      Container(
+                          height: 50,
+                          width: 300,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
+                                        side: BorderSide(color: Colors.grey)))),
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                  fontFamily: fontFamily,
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () async {
+                              if (nameController.text.isEmpty) {
+                                setState(() {
+                                  _validate = true;
+                                });
+                              } else {
+                                await AuthServices.signUp(
+                                    nameController.text,
+                                    emailController.text,
+                                    passwordController.text);
+                                //zzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+                                User user = AuthServices.getUser();
+                                print(user.uid);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return MyHomePage();
+                                    },
+                                  ),
+                                );
+                              }
+                            },
+                          )),
+                      
                       TextButton(
                         style: TextButton.styleFrom(
                           textStyle: const TextStyle(fontSize: 15),
@@ -136,21 +156,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget inputText({label, obscureText = false, formController}) {
+  Widget inputText({hint, obscureText = false, formController}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.start,
-        ),
         TextFormField(
           obscureText: obscureText,
           controller: formController,
           decoration: InputDecoration(
-            errorText: _validate ? '$label can\'t be empty' : null,
-            labelStyle: TextStyle(color: a),
+            hintText: '$hint',
+            hintStyle: Theme.of(context).textTheme.body1,
+            errorText: _validate ? '$hint can\'t be empty' : null,
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: a),
             ),

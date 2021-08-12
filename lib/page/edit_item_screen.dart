@@ -20,6 +20,7 @@ class EditItemScreen extends StatefulWidget {
 
   EditItemScreen(this.productName, this.productCategory, this.productPrice,
       this.productStock);
+
   @override
   _EditItemScreen createState() => _EditItemScreen();
 }
@@ -128,8 +129,6 @@ class _EditItemScreen extends State<EditItemScreen> {
                     width: itemWidth / 3,
                     child: ElevatedButton(
                       style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.grey),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
