@@ -31,7 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(
           "Profile",
         ),
-        backgroundColor: Colors.amber,
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,

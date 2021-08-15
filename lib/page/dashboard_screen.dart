@@ -15,13 +15,13 @@ import 'package:stock_management_flutter/widgets/item_list_widget.dart';
 
 class DashBoardScreen extends StatelessWidget {
   final User user;
+
   DashBoardScreen(this.user);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.amber,
@@ -168,111 +168,22 @@ class DashboardScreenMobile extends StatelessWidget {
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Expanded(
-                          child: Card(
-                              color: Colors.amberAccent,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 16, horizontal: 20),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    IconButton(
-                                        icon: Icon(
-                                          Icons.add_circle_outline_outlined,
-                                          size: 64,
-                                          color: Colors.black,
-                                        ),
-                                        iconSize: 64,
-                                        alignment: Alignment.center,
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return AddItemScreen();
-                                          }));
-                                        }),
-                                    Text(
-                                      "Add Item",
-                                      style:
-                                          Theme.of(context).textTheme.subtitle1,
-                                    )
-                                  ],
-                                ),
-                              )),
+                          child: quickActionCard(
+                              context,
+                              AddItemScreen(),
+                              Colors.amberAccent,
+                              "Add Item",
+                              Icons.add_circle_outline_outlined),
                           flex: 1,
                         ),
                         Expanded(
-                          child: Card(
-                              color: Colors.blueAccent,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 16, horizontal: 20),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    IconButton(
-                                        icon: Icon(
-                                          Icons.shopping_cart,
-                                          size: 64,
-                                          color: Colors.black,
-                                        ),
-                                        iconSize: 64,
-                                        alignment: Alignment.center,
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return AddToCartScreen();
-                                          }));
-                                        }),
-                                    Text(
-                                      "Sell",
-                                      style:
-                                          Theme.of(context).textTheme.subtitle1,
-                                    )
-                                  ],
-                                ),
-                              )),
+                          child: quickActionCard(context, AddToCartScreen(),
+                              Colors.blueAccent, "Sell", Icons.shopping_cart),
                           flex: 1,
                         ),
                         Expanded(
-                          child: Card(
-                              color: Colors.redAccent,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 16, horizontal: 20),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    IconButton(
-                                        icon: Icon(
-                                          Icons.warning,
-                                          size: 64,
-                                          color: Colors.black,
-                                        ),
-                                        iconSize: 64,
-                                        alignment: Alignment.center,
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return LowStockItemScreen();
-                                          }));
-                                        }),
-                                    Text(
-                                      "Low Stock",
-                                      style:
-                                          Theme.of(context).textTheme.subtitle1,
-                                    )
-                                  ],
-                                ),
-                              )),
+                          child: quickActionCard(context, LowStockItemScreen(),
+                              Colors.redAccent, "Low Stock", Icons.warning),
                           flex: 1,
                         ),
                       ],
@@ -322,5 +233,38 @@ class DashboardScreenMobile extends StatelessWidget {
     );
   }
 
+  Widget quickActionCard(BuildContext context, StatefulWidget widget,
+      Color color, String label, IconData icon) {
+    return Card(
+        color: color,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+          alignment: Alignment.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              IconButton(
+                  icon: Icon(
+                    icon,
+                    size: 64,
+                    color: Colors.black,
+                  ),
+                  iconSize: 64,
+                  alignment: Alignment.center,
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return widget;
+                    }));
+                  }),
+              Text(
+                label,
+                style: Theme.of(context).textTheme.subtitle1,
+              )
+            ],
+          ),
+        ));
+  }
 // Widget productCard() => ProductCardWidget();ddddddddddddd
 }

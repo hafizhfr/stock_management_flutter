@@ -17,7 +17,6 @@ class _CartScreenState extends State<CartScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
         title: Text("Cart"),
       ),
       body: Padding(

@@ -54,7 +54,6 @@ class _EditItemScreen extends State<EditItemScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amberAccent,
         title: Text("Edit Item"),
       ),
       // resizeToAvoidBottomInset: false,

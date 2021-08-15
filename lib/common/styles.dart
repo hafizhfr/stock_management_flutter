@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-final Color primary = Color(0xFFFED049);
-final Color secondary = Color(0xFF2083CC);
+final Color primary = Color(0xFFFFBF00);
+final Color secondary = Color(0xFF007580);
 final myTextTheme = TextTheme(
   headline1: GoogleFonts.roboto(
       fontSize: 96, fontWeight: FontWeight.w300, letterSpacing: -1.5),
