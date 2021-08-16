@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stock_management_flutter/firebase_config/auth_services.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 import 'package:stock_management_flutter/page/history_screen.dart';
 import 'package:stock_management_flutter/page/login_screen.dart';
 import 'package:stock_management_flutter/page/profile_screen.dart';
-import 'package:stock_management_flutter/page/register_screen.dart';
-import 'package:stock_management_flutter/widgets/styles.dart';
+import 'package:stock_management_flutter/common/styles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,9 +25,12 @@ class MyApp extends StatelessWidget {
         primaryColor: primary,
         accentColor: secondary,
         scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: primary
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                primary: secondary,
+                primary: primary,
                 textStyle: TextStyle(fontSize: 20),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(0))))),

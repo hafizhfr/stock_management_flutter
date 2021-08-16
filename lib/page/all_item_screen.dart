@@ -23,7 +23,6 @@ class _AllItemScreen extends State<AllItemScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('All Item'),
-        backgroundColor: Colors.amber,
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -55,6 +54,7 @@ class _AllItemScreen extends State<AllItemScreen> {
                             },
                             controller: searchController,
                             decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
                               prefixIcon: Icon(Icons.search
                                   //   icon: Icon(
                                   // Icons.search,

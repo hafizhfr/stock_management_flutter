@@ -30,7 +30,7 @@ class _DropDownCategoryWidget extends State<DropDownCategoryWidget> {
       child: InputDecorator(
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
-          contentPadding: EdgeInsets.all(10),
+          // contentPadding: EdgeInsets.all(10),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(

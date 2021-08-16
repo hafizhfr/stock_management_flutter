@@ -15,7 +15,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [],
-        backgroundColor: Colors.amber,
         title: Text('History'),
         automaticallyImplyLeading: false,
       ),

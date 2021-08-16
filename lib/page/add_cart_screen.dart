@@ -1,12 +1,8 @@
-import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:stock_management_flutter/page/cart_screen.dart';
-import 'package:stock_management_flutter/page/dashboard_screen.dart';
-import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 import 'package:stock_management_flutter/widgets/dropdown_product_widget.dart';
 
 class AddToCartScreen extends StatefulWidget {
@@ -33,7 +29,6 @@ class _AddToCartScreen extends State<AddToCartScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Add To Cart"),
-          backgroundColor: Colors.amber,
         ),
         backgroundColor: Colors.white,
         body: SafeArea(

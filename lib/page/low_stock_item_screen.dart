@@ -22,7 +22,6 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Low Stock'),
-        backgroundColor: Colors.amber,
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -53,6 +52,7 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
                             },
                             controller: searchController,
                             decoration: InputDecoration(
+                              border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.search
                               ),
                               hintText: "Search...",
