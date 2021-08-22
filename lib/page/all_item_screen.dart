@@ -48,13 +48,14 @@ class _AllItemScreen extends State<AllItemScreen> {
                         child: TextField(
                             onChanged: (value) {
                               setState(() {
-                                searchQuery = value;
+                                searchQuery = value.toUpperCase();
                                 print(searchQuery);
                               });
                             },
                             controller: searchController,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
                               prefixIcon: Icon(Icons.search
                                   //   icon: Icon(
                                   // Icons.search,

@@ -88,9 +88,9 @@ class DashboardScreenMobile extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                "Rp.1.000.000",
+                                ItemStatus.getTotalSales().toString(),
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.subtitle2,
+                                style: Theme.of(context).textTheme.headline5,
                               )
                             ],
                           )),
@@ -135,7 +135,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Text(
-                                  "150",
+                                  ItemStatus.getStockOut().toString(),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.headline5,
                                 )

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:basic_utils/basic_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/widgets/dropdown_category_widget.dart';
 import 'package:stock_management_flutter/widgets/item_list_widget.dart';
@@ -21,7 +22,7 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Low Stock'),
+        title: Text('Low Stock Item'),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -41,22 +42,30 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
             children: <Widget>[
               Container(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Expanded(
                         child: TextField(
                             onChanged: (value) {
                               setState(() {
-                                searchQuery = value;
+                                searchQuery = value.toUpperCase();
                                 print(searchQuery);
                               });
                             },
                             controller: searchController,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
                               prefixIcon: Icon(Icons.search
-                              ),
+                                  //   icon: Icon(
+                                  // Icons.search,
+                                  // color: Colors.black,
+                                  ),
                               hintText: "Search...",
                             ))),
+                    SizedBox(
+                      width: 8,
+                    ),
                     Expanded(child: dropDown()),
                   ],
                 ),
@@ -67,7 +76,7 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
               Expanded(
                 // color: Colors.black,
                 // height: MediaQuery.of(context).size.height,
-                child: ItemListWidget(searchQuery, false),
+                child: ItemListWidget(searchQuery, true),
               ),
               // ),
             ],
