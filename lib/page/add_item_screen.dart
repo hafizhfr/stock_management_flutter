@@ -192,6 +192,11 @@ class _AddItemScreen extends State<AddItemScreen> {
     super.dispose();
   }
 
-  Widget dropDown() =>
-      DropDownCategoryWidget(controller: itemCategoryController, screenType: 1);
+  Widget dropDown() => DropDownCategoryWidget(
+        controller: itemCategoryController,
+        screenType: 1,
+        onSelected: () {
+          setState(() {});
+        },
+      );
 }
