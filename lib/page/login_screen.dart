@@ -20,7 +20,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool _validate = false;
+  bool _emailValidate = false;
+  bool _passwordValidate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,22 +64,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   Container(
                     child: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        hintStyle: Theme.of(context).textTheme.body1,
-                        errorText: _validate ? 'Email can\'t be empty' : null,
-                        labelStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: a),
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          hintStyle: Theme.of(context).textTheme.body1,
+                          errorText:
+                              _emailValidate ? 'Email can\'t be empty' : null,
+                          labelStyle: TextStyle(color: Colors.grey),
+                          border: UnderlineInputBorder(),
+                          // enabledBorder: UnderlineInputBorder(
+                          //   borderSide: BorderSide(color: b),
+                          // ),
+                          // focusedBorder: UnderlineInputBorder(
+                          //   borderSide: BorderSide(color: a),
+                          // ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: a),
-                        ),
-                      ),
-                      style: Theme.of(context).textTheme.subtitle1
-                    ),
+                        style: Theme.of(context).textTheme.subtitle1),
                   ),
                   SizedBox(
                     height: 16,
@@ -96,24 +98,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   // ),
                   Container(
                     child: TextField(
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        hintText: "Password",
-                        hintStyle: Theme.of(context).textTheme.body1,
-                        errorText:
-                            _validate ? 'Password can\'t be empty' : null,
-                        labelStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: a),
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          hintText: "Password",
+                          hintStyle: Theme.of(context).textTheme.body1,
+                          errorText: _passwordValidate
+                              ? 'Password can\'t be empty'
+                              : null,
+                          labelStyle: TextStyle(color: Colors.grey),
+                          border: UnderlineInputBorder(),
+                          // enabledBorder: UnderlineInputBorder(
+                          //   borderSide: BorderSide(color: a),
+                          // ),
+                          // focusedBorder: UnderlineInputBorder(
+                          //   borderSide: BorderSide(color: a),
+                          // ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: a),
-                        ),
-                      ),
-                        style: Theme.of(context).textTheme.subtitle1
-                    ),
+                        style: Theme.of(context).textTheme.subtitle1),
                   ),
                   SizedBox(
                     height: 32,
@@ -139,10 +142,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () async {
-                        if (emailController.text.isEmpty ||
-                            passwordController.text.isEmpty) {
+                        if (emailController.text.isEmpty) {
                           setState(() {
-                            _validate = true;
+                            _emailValidate = true;
+                          });
+                        } else if (passwordController.text.isEmpty) {
+                          setState(() {
+                            _passwordValidate = true;
                           });
                         } else {
                           User user = await AuthServices.signIn(
@@ -150,12 +156,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (user != null) {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              _validate = false;
                               return MyHomePage();
                             }));
-                          } else {
-                            setState(() {});
                           }
+                          // else {
+                          //   setState(() {});
+                          // }
                         }
                       },
                     ),

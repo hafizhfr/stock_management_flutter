@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 class HistoryCollection {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
   static CollectionReference collection = firestore.collection('history');
+
   static void addToDB(String itemName, String userFullName, int actionType) {
     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
     DateFormat timeFormat = DateFormat('HH:mm:ss');

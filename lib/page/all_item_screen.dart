@@ -52,24 +52,29 @@ class _AllItemScreen extends State<AllItemScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Expanded(
-                        child: TextField(
-                            onChanged: (value) {
-                              setState(() {
-                                searchQuery = value.toUpperCase();
-                                print(searchQuery);
-                              });
-                            },
-                            controller: searchController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              prefixIcon: Icon(Icons.search
-                                  //   icon: Icon(
-                                  // Icons.search,
-                                  // color: Colors.black,
-                                  ),
-                              hintText: "Search...",
-                            ))),
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            searchQuery = value.toUpperCase();
+                            print(searchQuery);
+                          });
+                        },
+                        controller: searchController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.search
+                            //   icon: Icon(
+                            // Icons.search,
+                            // color: Colors.black,
+                            ,
+                          ),
+                          hintText: "Search...",
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       width: 8,
                     ),

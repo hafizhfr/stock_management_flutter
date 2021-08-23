@@ -114,7 +114,7 @@ class DashboardScreenMobile extends StatelessWidget {
                                   ItemStatus.getCurrentStock().toString(),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.headline5,
-                                )
+                                ),
                               ],
                             ),
                           ),
