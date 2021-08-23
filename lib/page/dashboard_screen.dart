@@ -221,7 +221,7 @@ class DashboardScreenMobile extends StatelessWidget {
                     Container(
                       height: 200,
                       width: double.infinity,
-                      child: ItemListWidget('', false),
+                      child: ItemListWidget('', '', false),
                     ),
                   ],
                 ),

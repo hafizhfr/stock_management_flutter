@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 class DropDownCategoryWidget extends StatefulWidget {
   final ItemCategoryController controller;
-  final int screenType;
+  final VoidCallback onSelected;
+  final int screenType; // 1 = all item, 2 = edit item
 
-  DropDownCategoryWidget(this.controller, this.screenType);
+  DropDownCategoryWidget({this.controller, this.onSelected, this.screenType});
   @override
   _DropDownCategoryWidget createState() => _DropDownCategoryWidget();
 }
@@ -13,6 +14,15 @@ class DropDownCategoryWidget extends StatefulWidget {
 class _DropDownCategoryWidget extends State<DropDownCategoryWidget> {
   String _dropDownValue;
 
+  @override
+  void initState() {
+    super.initState();
+    widget.screenType == 2
+        ? _dropDownValue = widget.controller.itemCategory
+        : _dropDownValue = null;
+  }
+
+//bisa dipindah ke class lain
   List<String> kategoriBarang = [
     'Makanan',
     'Alat Tulis',
@@ -45,43 +55,11 @@ class _DropDownCategoryWidget extends State<DropDownCategoryWidget> {
                 value: kategori,
               );
             }).toList(),
-            // DropdownMenuItem(
-            //   child: Text("Makanan"),
-            //   value: "Makanan",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Alat Tulis"),
-            //   value: "Alat Tulis",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Pakaian"),
-            //   value: "Pakaian",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Minuman"),
-            //   value: "Minuman",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Obat-obatan"),
-            //   value: "Obat-obatan",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Peralatan Mandi"),
-            //   value: "Peralatan Mandi",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Keperluan Bayi"),
-            //   value: "Keperluan Bayi",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Lain-lain"),
-            //   value: "Dan lain-lain",
-            // )
-
             onChanged: (newValue) {
               setState(() {
                 _dropDownValue = newValue;
                 widget.controller.itemCategory = _dropDownValue;
+                widget.onSelected();
               });
             },
           ),

@@ -14,9 +14,16 @@ class AllItemScreen extends StatefulWidget {
 
 class _AllItemScreen extends State<AllItemScreen> {
   final searchController = TextEditingController();
-  String searchQuery = '';
-
   ItemCategoryController controller = ItemCategoryController(itemCategory: '');
+
+  String searchQuery;
+  String searchByCategoryQuery;
+  @override
+  void initState() {
+    super.initState();
+    searchQuery = '';
+    searchByCategoryQuery = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +73,18 @@ class _AllItemScreen extends State<AllItemScreen> {
                     SizedBox(
                       width: 8,
                     ),
-                    Expanded(child: dropDown()),
+                    Expanded(
+                      child: DropDownCategoryWidget(
+                        controller: controller,
+                        screenType: 1,
+                        onSelected: () {
+                          setState(() {
+                            searchByCategoryQuery = controller.itemCategory;
+                            print(searchByCategoryQuery);
+                          });
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -76,7 +94,8 @@ class _AllItemScreen extends State<AllItemScreen> {
               Expanded(
                 // color: Colors.black,
                 // height: MediaQuery.of(context).size.height,
-                child: ItemListWidget(searchQuery, false),
+                child:
+                    ItemListWidget(searchQuery, searchByCategoryQuery, false),
               ),
               // ),
             ],
@@ -85,7 +104,4 @@ class _AllItemScreen extends State<AllItemScreen> {
       ),
     );
   }
-
-  Widget dropDown() => DropDownCategoryWidget(controller, 1);
-  // Widget productCard() => ProductCardWidget();
 }

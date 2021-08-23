@@ -4,8 +4,10 @@ import 'package:stock_management_flutter/widgets/card_product_widget.dart';
 
 class ItemListWidget extends StatefulWidget {
   final String searchQuery;
+  final String searchByCategoryQuery;
   final bool isLowStockPage;
-  ItemListWidget(this.searchQuery, this.isLowStockPage);
+  ItemListWidget(
+      this.searchQuery, this.searchByCategoryQuery, this.isLowStockPage);
   @override
   _ItemListWidgetState createState() => _ItemListWidgetState();
 }
@@ -24,23 +26,49 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         shrinkWrap: true,
         children: [
           StreamBuilder<QuerySnapshot>(
+            //TODO: NAMBAH FIELD BARU isLowStock dan CLASS BARU BUAT NGECEK TIAP ADD, EDIT
+            //.where('jumlahBarang', isLessThanOrEqualTo: 5)
             stream: !widget.isLowStockPage
                 ? widget.searchQuery == ''
-                    ? itemCollection.orderBy('namaBarang').snapshots()
-                    : itemCollection
-                        .where('namaBarang',
-                            isGreaterThanOrEqualTo: widget.searchQuery)
-                        .orderBy('namaBarang')
-                        .snapshots()
+                    ? widget.searchByCategoryQuery == ''
+                        ? itemCollection.orderBy('namaBarang').snapshots()
+                        : itemCollection
+                            .where('kategori',
+                                isEqualTo: widget.searchByCategoryQuery)
+                            .orderBy('namaBarang')
+                            .snapshots()
+                    : widget.searchByCategoryQuery == ''
+                        ? itemCollection
+                            .where('namaBarang',
+                                isGreaterThanOrEqualTo: widget.searchQuery)
+                            .orderBy('namaBarang')
+                            .snapshots()
+                        : itemCollection
+                            .where('namaBarang',
+                                isGreaterThanOrEqualTo: widget.searchQuery)
+                            .where('kategori',
+                                isEqualTo: widget.searchByCategoryQuery)
+                            .orderBy('namaBarang')
+                            .snapshots()
                 : widget.searchQuery == ''
-                    ? itemCollection
-                        .where('jumlahBarang', isLessThanOrEqualTo: 5)
-                        .snapshots()
-                    : itemCollection
-                        .where('jumlahBarang', isLessThanOrEqualTo: 5)
-                        // .where('namaBarang',
-                        //     isGreaterThanOrEqualTo: widget.searchQuery)
-                        .snapshots(),
+                    ? widget.searchByCategoryQuery == ''
+                        ? itemCollection
+                            .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                            .snapshots()
+                        : itemCollection
+                            .where('kategori',
+                                isEqualTo: widget.searchByCategoryQuery)
+                            .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                            .snapshots()
+                    : widget.searchByCategoryQuery == ''
+                        ? itemCollection
+                            .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                            // .where('namaBarang',
+                            //     isGreaterThanOrEqualTo: widget.searchQuery)
+                            .snapshots()
+                        : itemCollection
+                            .where('jumlahBarang', isLessThanOrEqualTo: 5)
+                            .snapshots(),
             builder: (_, snapshot) {
               if (snapshot.hasData) {
                 return Column(
@@ -53,9 +81,9 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                         document['jumlahBarang']);
                   }).toList(),
                 );
-              } else {
-                return CircularProgressIndicator();
               }
+
+              return CircularProgressIndicator();
             },
           ),
         ],

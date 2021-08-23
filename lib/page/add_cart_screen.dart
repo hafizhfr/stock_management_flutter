@@ -12,7 +12,8 @@ class AddToCartScreen extends StatefulWidget {
 
 class _AddToCartScreen extends State<AddToCartScreen> {
   final itemProductCountController = TextEditingController();
-  ItemProductController itemProductController = ItemProductController(itemProduct: 'Makanan');
+  ItemProductController itemProductController =
+      ItemProductController(itemProduct: 'Makanan');
 
   String kategori = '';
 
@@ -42,11 +43,13 @@ class _AddToCartScreen extends State<AddToCartScreen> {
                   "Nama Item",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Flexible(
                     child: DropDownProductWidget(
-                      itemProductController,
-                    )),
+                  itemProductController,
+                )),
                 SizedBox(
                   height: 8,
                 ),
@@ -54,77 +57,80 @@ class _AddToCartScreen extends State<AddToCartScreen> {
                   "Jumlah Item",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Flexible(
                     child: TextField(
-                      keyboardType: TextInputType.number,
-                      controller: itemProductCountController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          // labelText: "Jumlah Item"
-                      ),
-                    )),
+                  keyboardType: TextInputType.number,
+                  controller: itemProductCountController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    // labelText: "Jumlah Item"
+                  ),
+                )),
                 SizedBox(
                   height: 32,
                 ),
                 Flexible(
-                    child: Container(
-                      height: 50,
-                      width: itemWidth / 2,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    side: BorderSide(color: Colors.grey)))),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Add To Cart',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Icons.shopping_cart,
+                  child: Container(
+                    height: 50,
+                    width: itemWidth / 2,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      side: BorderSide(color: Colors.grey)))),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Add To Cart',
+                              style: TextStyle(
                                 color: Colors.black,
-                              )
-                            ]),
-                        onPressed: () {
-                          if (itemProductCountController.text.isEmpty) {
-                            setState(() {
-                              _validate = true;
-                            });
-                          } else {
-                            // itemCollection.add({
-                            //   'namaBarang': itemNameController.text,
-                            //   'jumlahBarang':
-                            //   int.tryParse(itemProductCountController.text),
-                            //   'hargaBarang': int.tryParse(itemPriceController.text),
-                            //   'kategori': itemProductController.itemProduct,
-                            // });
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Icon(
+                              Icons.shopping_cart,
+                              color: Colors.black,
+                            )
+                          ]),
+                      onPressed: () {
+                        if (itemProductCountController.text.isEmpty) {
+                          setState(() {
+                            _validate = true;
+                          });
+                        } else {
+                          // itemCollection.add({
+                          //   'namaBarang': itemNameController.text,
+                          //   'jumlahBarang':
+                          //   int.tryParse(itemProductCountController.text),
+                          //   'hargaBarang': int.tryParse(itemPriceController.text),
+                          //   'kategori': itemProductController.itemProduct,
+                          // });
 
-                            itemProductCountController.text = '';
-                            Fluttertoast.showToast(
-                                msg: 'Berhasil menambahkan barang ke keranjang',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.BOTTOM,
-                                fontSize: 16.0);
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              _validate = false;
-                              return CartScreen();
-                            }));
-                          }
-                        },
-                      ),
-                    ))
+                          itemProductCountController.text = '';
+                          Fluttertoast.showToast(
+                              msg: 'Berhasil menambahkan barang ke keranjang',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              fontSize: 16.0);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            _validate = false;
+                            return CartScreen();
+                          }));
+                        }
+                      },
+                    ),
+                  ),
+                )
               ],
             ),
           ),

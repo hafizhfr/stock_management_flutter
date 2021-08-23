@@ -14,9 +14,16 @@ class LowStockItemScreen extends StatefulWidget {
 
 class _LowStockItemScreen extends State<LowStockItemScreen> {
   final searchController = TextEditingController();
-  String searchQuery = '';
-
   ItemCategoryController controller = ItemCategoryController(itemCategory: '');
+
+  String searchQuery;
+  String searchByCategoryQuery;
+  @override
+  void initState() {
+    super.initState();
+    searchQuery = '';
+    searchByCategoryQuery = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +83,7 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
               Expanded(
                 // color: Colors.black,
                 // height: MediaQuery.of(context).size.height,
-                child: ItemListWidget(searchQuery, true),
+                child: ItemListWidget(searchQuery, searchByCategoryQuery, true),
               ),
               // ),
             ],
@@ -86,6 +93,15 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
     );
   }
 
-  Widget dropDown() => DropDownCategoryWidget(controller, 1);
+  Widget dropDown() => DropDownCategoryWidget(
+        controller: controller,
+        screenType: 1,
+        onSelected: () {
+          setState(() {
+            searchByCategoryQuery = controller.itemCategory;
+            print(searchByCategoryQuery);
+          });
+        },
+      );
   // Widget productCard() => ProductCardWidget();
 }

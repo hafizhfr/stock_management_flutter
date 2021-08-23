@@ -105,7 +105,10 @@ class _EditItemScreen extends State<EditItemScreen> {
               SizedBox(
                 height: 15,
               ),
-              DropDownCategoryWidget(itemCategoryController, 2),
+              DropDownCategoryWidget(
+                controller: itemCategoryController,
+                screenType: 2,
+              ),
               SizedBox(
                 height: 15,
               ),
@@ -167,31 +170,37 @@ class _EditItemScreen extends State<EditItemScreen> {
                             _validate = true;
                           });
                         } else {
-                          setState(() {
-                            _updateItem(
-                                widget.productName,
-                                itemNameController.text,
-                                int.tryParse(itemCountController.text),
-                                int.tryParse(itemPriceController.text),
-                                itemCategoryController.itemCategory);
+                          setState(
+                            () {
+                              _updateItem(
+                                  widget.productName,
+                                  itemNameController.text,
+                                  int.tryParse(itemCountController.text),
+                                  int.tryParse(itemPriceController.text),
+                                  itemCategoryController.itemCategory);
 
-                            HistoryCollection.addToDB(
-                                itemNameController.text, user.displayName, 2);
+                              HistoryCollection.addToDB(
+                                  itemNameController.text, user.displayName, 2);
 
-                            Fluttertoast.showToast(
-                              msg: 'Berhasil mengupdate barang',
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.BOTTOM,
-                              fontSize: 16.0,
-                            );
+                              Fluttertoast.showToast(
+                                msg: 'Berhasil mengupdate barang',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM,
+                                fontSize: 16.0,
+                              );
+                              int oldItemCount = widget.productStock;
+                              int newItemCount =
+                                  int.tryParse(itemCountController.text);
 
-                            widget.productStock >
-                                    int.tryParse(itemCountController.text)
-                                ? ItemStatus.updateTotalStock(
-                                    int.tryParse(itemCountController.text), 1)
-                                : ItemStatus.updateTotalStock(
-                                    int.tryParse(itemCountController.text), 0);
-                          });
+                              if (oldItemCount > newItemCount) {
+                                ItemStatus.updateTotalStock(
+                                    oldItemCount - newItemCount, 1);
+                              } else {
+                                ItemStatus.updateTotalStock(
+                                    newItemCount - oldItemCount, 0);
+                              }
+                            },
+                          );
                         }
                       },
                     ),

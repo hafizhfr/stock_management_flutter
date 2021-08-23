@@ -12,14 +12,17 @@ class ItemStatus {
   static int _totalSales;
 
 //screenType; 0 = add, 1 = delete
-  static Future<void> updateTotalStock(int num, int screenType) async {
+  static Future<void> updateTotalStock(int increment, int screenType) async {
     int newTotal = getCurrentStock();
-    if (screenType == 0) {
-      newTotal += num;
-    } else if (screenType == 1) {
-      newTotal -= num;
-    }
+    print(increment);
 
+    print(_totalStock);
+    if (screenType == 0) {
+      newTotal += increment;
+    } else if (screenType == 1) {
+      newTotal -= increment;
+    }
+    print(newTotal);
     document.update({'stockIn': newTotal});
     //todo: add stock out
   }

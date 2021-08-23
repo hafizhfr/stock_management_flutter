@@ -89,7 +89,7 @@ class _AddItemScreen extends State<AddItemScreen> {
               SizedBox(
                 height: 15,
               ),
-              DropDownCategoryWidget(itemCategoryController, 1),
+              dropDown(),
               SizedBox(
                 height: 15,
               ),
@@ -122,7 +122,6 @@ class _AddItemScreen extends State<AddItemScreen> {
                           children: <Widget>[
                             Text(
                               'Simpan',
-
                             ),
                             SizedBox(
                               width: 10,
@@ -193,5 +192,6 @@ class _AddItemScreen extends State<AddItemScreen> {
     super.dispose();
   }
 
-  Widget dropDown() => DropDownCategoryWidget(itemCategoryController, 1);
+  Widget dropDown() =>
+      DropDownCategoryWidget(controller: itemCategoryController, screenType: 1);
 }
