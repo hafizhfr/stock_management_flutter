@@ -21,22 +21,32 @@ class _AddToCartScreen extends State<AddToCartScreen> {
       ItemProductController(itemProduct: 'Makanan');
 
   bool _validate = false;
-
+  List a = [];
+  List<String> itemNameList = [];
   String selectedProductName;
   String selectedProductCount;
 
-  static const itemNameList = [
-    'ya',
-    'yaa',
-    'yyyy',
-    'dddddd',
-  ];
+  @override
+  void initState() {
+    ItemList.getItemListOnce().then((value) => a = value);
+
+    super.initState();
+  }
+
+  void addToList() {
+    a.forEach((element) {
+      itemNameList.add(element.namaBarang);
+      print(a.length);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width;
-
+    if (itemNameList.length == 0) {
+      addToList();
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text("Add To Cart"),
