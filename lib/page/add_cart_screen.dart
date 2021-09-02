@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/firebase_config/cart_db.dart';
+import 'package:stock_management_flutter/firebase_config/dashboard_item_status_db.dart';
 import 'package:stock_management_flutter/item.dart';
 import 'package:stock_management_flutter/items_list.dart';
 import 'package:stock_management_flutter/page/cart_screen.dart';
@@ -178,6 +179,10 @@ class _AddToCartScreen extends State<AddToCartScreen> {
                               int.tryParse(productCountController.text),
                               selectedProductPrice,
                             );
+
+                            ItemStatus.updateStockOut(
+                                int.tryParse(productCountController.text));
+
                             Fluttertoast.showToast(
                               msg: 'Berhasil menambahkan barang ke keranjang',
                               toastLength: Toast.LENGTH_SHORT,
@@ -187,13 +192,6 @@ class _AddToCartScreen extends State<AddToCartScreen> {
                             productNameController.text = '';
                             productCountController.text = '';
                           }
-                          // itemCollection.add({
-                          //   'namaBarang': itemNameController.text,
-                          //   'jumlahBarang':
-                          //   int.tryParse(itemProductCountController.text),
-                          //   'hargaBarang': int.tryParse(itemPriceController.text),
-                          //   'kategori': itemProductController.itemProduct,
-                          // });
                         },
                       ),
                     ),

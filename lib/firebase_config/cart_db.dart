@@ -4,6 +4,7 @@ class Cart {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
   static CollectionReference itemCollection = firestore.collection('items');
   static CollectionReference cartCollection = firestore.collection('cart');
+  int _cartTotal;
 
   static void addToDB(String itemName, int itemCount, int itemPrice) {
     cartCollection.add(

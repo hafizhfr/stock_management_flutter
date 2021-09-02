@@ -27,6 +27,14 @@ class ItemStatus {
     //todo: add stock out
   }
 
+  static Future<void> updateStockOut(int sales) async {
+    int newTotal = getStockOut();
+    newTotal += sales;
+
+    document.update({'stockOut': newTotal});
+    //todo: add stock out
+  }
+
   static int getCurrentStock() {
     document.snapshots().listen((event) async {
       _totalStock = await event.get('stockIn');

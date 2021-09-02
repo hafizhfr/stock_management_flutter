@@ -4,24 +4,27 @@ import 'package:fluttertoast/fluttertoast.dart';
 class AuthServices {
   static FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static Future<User> signUp(
+  static Future<String> signUp(
       String fullName, String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email.trim(),
+        password: password.trim(),
+      );
       User user = result.user;
       user.updateDisplayName(fullName);
       Fluttertoast.showToast(msg: 'Berhasil membuat akun baru.');
-      return user;
+      return 'Success';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Fluttertoast.showToast(msg: 'Password terlalu lemah.');
       } else if (e.code == 'email-already-in-use') {
         Fluttertoast.showToast(msg: 'Alamat email sudah digunakan akun lain.');
+      } else {
+        Fluttertoast.showToast(msg: e.message);
       }
     } catch (e) {
-      print(e.toString());
-      return null;
+      rethrow;
     }
   }
 
