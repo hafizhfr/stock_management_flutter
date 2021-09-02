@@ -151,13 +151,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             _passwordValidate = true;
                           });
                         } else {
+                          print('login sukses');
                           User user = await AuthServices.signIn(
                               emailController.text, passwordController.text);
                           if (user != null) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return MyHomePage();
-                            }));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return MyHomePage();
+                              }),
+                            );
                           }
                           // else {
                           //   setState(() {});

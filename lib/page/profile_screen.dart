@@ -89,34 +89,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Column(
                     children: [
                       TextField(
-                        enabled: isEnableTextField,
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.person,
-                            color: Colors.black,
+                          enabled: isEnableTextField,
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.black,
+                            ),
+                            hintText: "Full Name",
+                            // errorText: _validate ? 'Password Can\'t Be Empty' : null,
                           ),
-                          hintText: "Full Name",
-                          // errorText: _validate ? 'Password Can\'t Be Empty' : null,
-                        ),
-                          style: Theme.of(context).textTheme.headline6
-                      ),
+                          style: Theme.of(context).textTheme.headline6),
                       SizedBox(
                         height: 15,
                       ),
                       TextField(
-                        enabled: isEnableTextField,
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.email_outlined,
-                            color: Colors.black,
+                          enabled: isEnableTextField,
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
+                              color: Colors.black,
+                            ),
+                            hintText: "xxxxx@mail.com",
+                            // errorText: _validate ? 'Password Can\'t Be Empty' : null,
                           ),
-                          hintText: "xxxxx@mail.com",
-                          // errorText: _validate ? 'Password Can\'t Be Empty' : null,
-                        ),
-                          style: Theme.of(context).textTheme.headline6
-                      ),
+                          style: Theme.of(context).textTheme.headline6),
                     ],
                   ),
                   SizedBox(
@@ -131,12 +129,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           } else {
                             Fluttertoast.showToast(
                                 msg: 'Profile berhasil diupdate');
-                            setState(() async {
+                            await AuthServices.updateUser(
+                                nameController.text, emailController.text);
+                            setState(() {
                               isEnableTextField = false;
-                              await AuthServices.updateUser(
-                                  nameController.text, emailController.text);
-
-                              ;
                             });
                           }
                         },

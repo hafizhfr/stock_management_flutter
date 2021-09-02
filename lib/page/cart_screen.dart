@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stock_management_flutter/firebase_config/cart_db.dart';
 import 'package:stock_management_flutter/main.dart';
 import 'package:stock_management_flutter/page/dashboard_screen.dart';
 
@@ -49,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
                   )),
                   Expanded(
                       child: Text(
-                    "Amount",
+                    "Price",
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
@@ -64,52 +66,92 @@ class _CartScreenState extends State<CartScreen> {
             ),
             Expanded(
               flex: 8,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              "name",
-                              style: Theme.of(context).textTheme.bodyText1,
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                          Expanded(
-                              child: Text(
-                            "qty",
-                            style: Theme.of(context).textTheme.bodyText1,
-                            textAlign: TextAlign.center,
-                          )),
-                          Expanded(
-                              child: Text(
-                            "Rp. amount",
-                            style: Theme.of(context).textTheme.bodyText1,
-                            textAlign: TextAlign.end,
-                          )),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Container(
-                        width: size.width,
-                        height: 1,
-                        color: Colors.amber,
-                      ),
-                      SizedBox(
-                        height: 16,
-                      )
-                    ],
-                  );
-                },
+              child: ListView(
+                children: [
+                  StreamBuilder<QuerySnapshot>(
+                    stream: Cart.cartCollection.snapshots(),
+                    builder: (_, snapshot) {
+                      if (snapshot.hasData) {
+                        return Column(
+                          children: snapshot.data.docs.map((data) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    data['itemName'],
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    data['itemCount'].toString(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Rp ${data['itemPrice'].toString()}',
+                                    textAlign: TextAlign.end,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                        );
+                      }
+                      return CircularProgressIndicator();
+                    },
+                  )
+                ],
               ),
+              // child: ListView.builder(
+              //   shrinkWrap: true,
+              //   itemCount: items.length,
+              //   itemBuilder: (context, index) {
+              //     return Column(
+              //       children: [
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           crossAxisAlignment: CrossAxisAlignment.center,
+              //           children: <Widget>[
+              //             Expanded(
+              //               child: Text(
+              //                 "name",
+              //                 style: Theme.of(context).textTheme.bodyText1,
+              //                 textAlign: TextAlign.start,
+              //               ),
+              //             ),
+              //             Expanded(
+              //                 child: Text(
+              //               "qty",
+              //               style: Theme.of(context).textTheme.bodyText1,
+              //               textAlign: TextAlign.center,
+              //             )),
+              //             Expanded(
+              //                 child: Text(
+              //               "Rp. amount",
+              //               style: Theme.of(context).textTheme.bodyText1,
+              //               textAlign: TextAlign.end,
+              //             )),
+              //           ],
+              //         ),
+              //         SizedBox(
+              //           height: 16,
+              //         ),
+              //         Container(
+              //           width: size.width,
+              //           height: 1,
+              //           color: Colors.amber,
+              //         ),
+              //         SizedBox(
+              //           height: 16,
+              //         )
+              //       ],
+              //     );
+              //   },
+              // ),
             ),
             SizedBox(
               height: 8,
@@ -127,17 +169,20 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   Expanded(
-                      child: Text(
-                    "Total",
-                    style: Theme.of(context).textTheme.bodyText1,
-                    textAlign: TextAlign.center,
-                  )),
+                    child: Text(
+                      "Total",
+                      style: Theme.of(context).textTheme.bodyText1,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  // ngeloop list abis itu ditampilin
                   Expanded(
-                      child: Text(
-                    "Rp. 300.000",
-                    style: Theme.of(context).textTheme.bodyText1,
-                    textAlign: TextAlign.end,
-                  )),
+                    child: Text(
+                      "Rp. 300.000",
+                      style: Theme.of(context).textTheme.bodyText1,
+                      textAlign: TextAlign.end,
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_management_flutter/firebase_config/cart_db.dart';
 import 'package:stock_management_flutter/item.dart';
 import 'package:stock_management_flutter/items_list.dart';
 import 'package:stock_management_flutter/page/cart_screen.dart';
@@ -20,23 +21,27 @@ class _AddToCartScreen extends State<AddToCartScreen> {
   ItemProductController itemProductController =
       ItemProductController(itemProduct: 'Makanan');
 
-  bool _validate = false;
-  List a = [];
+  bool _itemNameValidate = false;
+  bool _itemCountValidate = false;
+
+  List tempItemList = [];
   List<String> itemNameList = [];
-  String selectedProductName;
-  String selectedProductCount;
+  List<int> itemPriceList = [];
+
+  int selectedProductPrice;
 
   @override
   void initState() {
-    ItemList.getItemListOnce().then((value) => a = value);
+    ItemList.getItemListOnce().then((value) => tempItemList = value);
 
     super.initState();
   }
 
   void addToList() {
-    a.forEach((element) {
+    tempItemList.forEach((element) {
       itemNameList.add(element.namaBarang);
-      print(a.length);
+      itemPriceList.add(element.hargaBarang);
+      // print(a.length);
     });
   }
 
@@ -53,80 +58,87 @@ class _AddToCartScreen extends State<AddToCartScreen> {
         ),
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Form(
-              // key: this._formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  // Text(
-                  //   "Nama Item",
-                  //   style: Theme.of(context).textTheme.subtitle1,
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  Container(
-                    child: TypeAheadFormField(
-                      textFieldConfiguration: TextFieldConfiguration(
-                        controller: productNameController,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(
+              parent: NeverScrollableScrollPhysics(),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Form(
+                // key: this._formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: TypeAheadFormField(
+                        textFieldConfiguration: TextFieldConfiguration(
+                          controller: productNameController,
+                          decoration: InputDecoration(
+                            labelText: 'Nama Item',
+                            border: OutlineInputBorder(),
+                            errorText: _itemNameValidate
+                                ? 'Nama item tidak boleh kosong'
+                                : null,
+                          ),
+                        ),
+                        noItemsFoundBuilder: (context) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Item tidak ditemukan'),
+                        ),
+                        suggestionsCallback: (pattern) => itemNameList.where(
+                          (element) => element.toLowerCase().contains(
+                                pattern.toLowerCase(),
+                              ),
+                        ),
+                        itemBuilder: (_, String productName) => ListTile(
+                          title: Text(productName),
+                        ),
+                        onSuggestionSelected: (String selectedVal) {
+                          int selectedIndex = itemNameList.indexOf(selectedVal);
+                          if (selectedIndex != -1) {
+                            this.productNameController.text = selectedVal;
+                            this.selectedProductPrice =
+                                itemPriceList[selectedIndex];
+                            print(selectedVal);
+                          }
+                        },
+                        onSaved: (value) {},
+                        getImmediateSuggestions: false,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: productCountController,
                         decoration: InputDecoration(
-                          labelText: 'Nama Item',
                           border: OutlineInputBorder(),
-                          errorText:
-                              _validate ? 'Nama item tidak boleh kosong' : null,
+                          errorText: _itemCountValidate
+                              ? 'Jumlah item tidak boleh kosong'
+                              : null,
+                          labelText: 'Jumlah Item',
                         ),
                       ),
-                      noItemsFoundBuilder: (context) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Item tidak ditemukan'),
-                      ),
-                      suggestionsCallback: (pattern) => itemNameList.where(
-                        (element) => element.toLowerCase().contains(
-                              pattern.toLowerCase(),
-                            ),
-                      ),
-                      itemBuilder: (_, String productName) => ListTile(
-                        title: Text(productName),
-                      ),
-                      onSuggestionSelected: (String selectedVal) {
-                        this.productNameController.text = selectedVal;
-                        print(selectedVal);
-                      },
-                      onSaved: (value) => this.selectedProductName = value,
-                      getImmediateSuggestions: false,
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                      child: TextField(
-                    keyboardType: TextInputType.number,
-                    controller: productCountController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      errorText:
-                          _validate ? 'Jumlah item tidak boleh kosong' : null,
-                      labelText: 'Jumlah Item',
+                    SizedBox(
+                      height: 30,
                     ),
-                  )),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Flexible(
-                    child: Container(
+                    Container(
                       height: 50,
                       width: itemWidth / 2,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    side: BorderSide(color: Colors.grey)))),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              side: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -148,38 +160,79 @@ class _AddToCartScreen extends State<AddToCartScreen> {
                         onPressed: () {
                           if (productCountController.text.isEmpty) {
                             setState(() {
-                              _validate = true;
+                              _itemCountValidate = true;
                             });
-                          } else {
-                            setState(() {
-                              _validate = false;
-                            });
-                            // itemCollection.add({
-                            //   'namaBarang': itemNameController.text,
-                            //   'jumlahBarang':
-                            //   int.tryParse(itemProductCountController.text),
-                            //   'hargaBarang': int.tryParse(itemPriceController.text),
-                            //   'kategori': itemProductController.itemProduct,
-                            // });
-                            productCountController.text = '';
-                            Fluttertoast.showToast(
-                                msg: 'Berhasil menambahkan barang ke keranjang',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.BOTTOM,
-                                fontSize: 16.0);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                _validate = false;
-                                return CartScreen();
-                              }),
-                            );
                           }
+                          if (productNameController.text.isEmpty) {
+                            setState(() {
+                              _itemNameValidate = true;
+                            });
+                          }
+                          if (productCountController.text.isNotEmpty &&
+                              productNameController.text.isNotEmpty) {
+                            _itemNameValidate = false;
+                            _itemCountValidate = false;
+
+                            Cart.addToDB(
+                              productNameController.text,
+                              int.tryParse(productCountController.text),
+                              selectedProductPrice,
+                            );
+                            Fluttertoast.showToast(
+                              msg: 'Berhasil menambahkan barang ke keranjang',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              fontSize: 16.0,
+                            );
+                            productNameController.text = '';
+                            productCountController.text = '';
+                          }
+                          // itemCollection.add({
+                          //   'namaBarang': itemNameController.text,
+                          //   'jumlahBarang':
+                          //   int.tryParse(itemProductCountController.text),
+                          //   'hargaBarang': int.tryParse(itemPriceController.text),
+                          //   'kategori': itemProductController.itemProduct,
+                          // });
                         },
                       ),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      height: 50,
+                      width: itemWidth / 2,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              side: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                _itemNameValidate = false;
+                                _itemCountValidate = false;
+                                return CartScreen();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'View Cart',
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

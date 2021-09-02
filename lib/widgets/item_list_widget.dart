@@ -51,6 +51,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                             .orderBy('namaBarang')
                             .snapshots()
                 : widget.searchQuery == ''
+                    // lom ditambah query di ?
                     ? widget.searchByCategoryQuery == ''
                         ? itemCollection
                             .where('jumlahBarang', isLessThanOrEqualTo: 5)
@@ -67,6 +68,8 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                             //     isGreaterThanOrEqualTo: widget.searchQuery)
                             .snapshots()
                         : itemCollection
+                            .where('kategori',
+                                isEqualTo: widget.searchByCategoryQuery)
                             .where('jumlahBarang', isLessThanOrEqualTo: 5)
                             .snapshots(),
             builder: (_, snapshot) {
@@ -74,11 +77,12 @@ class _ItemListWidgetState extends State<ItemListWidget> {
                 return Column(
                   children: snapshot.data.docs.map((document) {
                     return ProductCardWidget(
-                        'imgTemp',
-                        document['namaBarang'],
-                        document['kategori'],
-                        document['hargaBarang'],
-                        document['jumlahBarang']);
+                      'imgTemp',
+                      document['namaBarang'],
+                      document['kategori'],
+                      document['hargaBarang'],
+                      document['jumlahBarang'],
+                    );
                   }).toList(),
                 );
               }
