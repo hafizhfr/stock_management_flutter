@@ -103,6 +103,7 @@ class FirebaseServices {
       'pesan': '$userFullName $userAction $itemName',
       'tanggal': '$currentDate',
       'waktu': '$currentTime',
+      'created': '${DateTime.now()}'
     });
   }
 
@@ -142,6 +143,6 @@ class FirebaseServices {
   }
 
   static Stream<QuerySnapshot> historyStream() {
-    return historyCollection.snapshots();
+    return historyCollection.orderBy("created", descending: true).snapshots();
   }
 }
