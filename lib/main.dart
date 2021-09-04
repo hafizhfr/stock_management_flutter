@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_management_flutter/firebase_config/auth_services.dart';
-import 'package:stock_management_flutter/page/dashboard_screen.dart';
-import 'package:stock_management_flutter/page/history_screen.dart';
-import 'package:stock_management_flutter/page/login_screen.dart';
-import 'package:stock_management_flutter/page/profile_screen.dart';
+import 'package:get/get.dart';
+import 'package:stock_management_flutter/bindings/auth_binding.dart';
 import 'package:stock_management_flutter/common/styles.dart';
+import 'package:stock_management_flutter/routes/app_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,19 +12,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Stock Management',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         primaryColor: primary,
         accentColor: secondary,
         scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          backgroundColor: primary
-        ),
+        appBarTheme: AppBarTheme(backgroundColor: primary),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 primary: primary,
@@ -44,78 +38,8 @@ class MyApp extends StatelessWidget {
         textTheme: myTextTheme.apply(
             bodyColor: Colors.black, displayColor: Colors.black),
       ),
-      home: MyHomePage(title: 'Stock Management Home'),
+      getPages: AppPages.pages,
+      initialBinding: AuthBinding(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: AuthServices.firebaseUserStream,
-      builder: (context, AsyncSnapshot<User> snapshot) {
-        if (snapshot.hasData) {
-          final screens = [
-            DashBoardScreen(snapshot.data),
-            HistoryScreen(),
-            ProfileScreen(snapshot.data)
-          ];
-          return Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: Colors.white,
-              fixedColor: Colors.amber,
-              currentIndex: 0,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              iconSize: 36,
-              items: [
-                BottomNavigationBarItem(
-                    icon: new Icon(
-                      Icons.home,
-                      color: Colors.amber,
-                    ),
-                    label: "Home"),
-                BottomNavigationBarItem(
-                    icon: new Icon(
-                      Icons.history,
-                      color: Colors.amber,
-                    ),
-                    label: "History"),
-                BottomNavigationBarItem(
-                    icon: new Icon(
-                      Icons.account_circle_rounded,
-                      color: Colors.amber,
-                    ),
-                    label: "Profile")
-              ],
-              onTap: onTabTapped,
-            ),
-            body: IndexedStack(
-              index: currentIndex,
-              children: screens,
-            ),
-          );
-        }
-        return LoginScreen();
-      },
-    );
-  }
-
-  void onTabTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
   }
 }

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 final Color primary = Color(0xFFFFBF00);
 final Color secondary = Color(0xFF007580);
+final fontFamily = 'Poppins';
+const Color a = Color(0xff25C266);
+const Color b = Color(0xff37dc9a);
+const Color c = Color(0xff33333F);
+const Color d = Color(0xff8E8E93);
 final myTextTheme = TextTheme(
   headline1: GoogleFonts.roboto(
       fontSize: 96, fontWeight: FontWeight.w300, letterSpacing: -1.5),
