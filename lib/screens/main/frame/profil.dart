@@ -19,7 +19,6 @@ class _ProfilState extends State<Profil> {
 
   @override
   void initState() {
-    // TODO: implement initState
     nameController.text = _authController.user.displayName!;
     emailController.text = _authController.user.email!;
     super.initState();
@@ -132,8 +131,9 @@ class _ProfilState extends State<Profil> {
                             if (nameController.text.isEmpty ||
                                 emailController.text.isEmpty) {
                             } else {
-                              Fluttertoast.showToast(
-                                  msg: 'Profile berhasil diupdate');
+                              _authController.updateUser(
+                                  nameController.text, emailController.text);
+
                               isEnableTextField.value = false;
                             }
                           },

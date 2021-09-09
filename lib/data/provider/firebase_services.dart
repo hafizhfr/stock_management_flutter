@@ -41,6 +41,14 @@ class FirebaseServices {
     return user;
   }
 
+  static Future<void> updateName(String newName) async {
+    await _auth.currentUser!.updateDisplayName(newName);
+  }
+
+  static Future<void> updateEmail(String newEmail) async {
+    await _auth.currentUser!.updateEmail(newEmail);
+  }
+
   //ITEM
 
   static Future<List<Item>> getItemListOnce() async {

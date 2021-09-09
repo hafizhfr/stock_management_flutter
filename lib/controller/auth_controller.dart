@@ -45,6 +45,16 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<void> updateUser(String fullName, String email) async {
+    try {
+      await FirebaseServices.updateName(fullName);
+      await FirebaseServices.updateEmail(email);
+      Fluttertoast.showToast(msg: 'Profile berhasil diupdate');
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   void onInit() {
     userState.listen((event) {
