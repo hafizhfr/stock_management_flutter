@@ -127,7 +127,6 @@ class _AddItemScreen extends State<AddItemScreen> {
                   children: [
                     Container(
                       height: 50,
-                      width: itemWidth / 3,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<

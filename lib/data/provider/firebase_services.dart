@@ -77,6 +77,13 @@ class FirebaseServices {
     });
   }
 
+  static Future<void> updateItemImg(
+      String namaBarang, String kategori, String img) async {
+    await itemCollection
+        .doc(("$namaBarang-$kategori").toLowerCase())
+        .update({'img': img});
+  }
+
   static Future<void> updateStock(
       String namaBarang, String kategori, int newStock) async {
     await itemCollection.doc(("$namaBarang-$kategori").toLowerCase()).set({

@@ -44,10 +44,7 @@ class MainPage extends StatelessWidget {
         onTap: onTabTapped,
       ),
       body: Obx(
-        () => IndexedStack(
-          index: currentIndex.value,
-          children: screens,
-        ),
+        () => screens[currentIndex.value],
       ),
     );
   }

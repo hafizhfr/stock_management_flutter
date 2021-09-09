@@ -10,7 +10,6 @@ import 'package:stock_management_flutter/screens/main/frame/dashboard/all_item_s
 import 'package:stock_management_flutter/screens/main/frame/dashboard/low_stock/low_stock_item_screen.dart';
 import 'package:stock_management_flutter/screens/main/frame/dashboard/sell/add_cart_screen.dart';
 import 'package:stock_management_flutter/screens/main/main_page.dart';
-import 'package:stock_management_flutter/screens/main/widget/item_list_widget.dart';
 
 class AppPages {
   static final pages = [

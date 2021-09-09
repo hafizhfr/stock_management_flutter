@@ -238,9 +238,11 @@ class Dashboard extends StatelessWidget {
                   onPressed: () {
                     Get.toNamed(routes);
                   }),
-              Text(
-                label,
-                style: Theme.of(context).textTheme.subtitle1,
+              FittedBox(
+                child: Text(
+                  label,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
               )
             ],
           ),

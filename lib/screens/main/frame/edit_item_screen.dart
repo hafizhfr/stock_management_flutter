@@ -40,6 +40,7 @@ class _EditItemScreen extends State<EditItemScreen> {
   @override
   void initState() {
     super.initState();
+    _itemsController.photoUrl.value = widget.img;
     itemNameController.text = widget.productName;
     itemPriceController.text = widget.productPrice.toString();
     itemCountController.text = widget.productStock.toString();
@@ -72,16 +73,16 @@ class _EditItemScreen extends State<EditItemScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(
-                color: Colors.grey,
-                // padding: EdgeInsets.all(48),
-                child: MaterialButton(
-                  onPressed: () {},
-                  child: Container(
-                    height: 150,
-                    width: 150,
-                    child: Image.network(
-                      widget.img,
+              MaterialButton(
+                onPressed: () {
+                  _showPicker(context);
+                },
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  child: Obx(
+                    () => Image.network(
+                      _itemsController.photoUrl.value,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -131,7 +132,6 @@ class _EditItemScreen extends State<EditItemScreen> {
                 children: [
                   Container(
                     height: 50,
-                    width: itemWidth / 3,
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape:
@@ -223,6 +223,61 @@ class _EditItemScreen extends State<EditItemScreen> {
       await FirebaseServices.updateTotalStock(
           newCount - oldCount, 0, _itemsController.getTotalStock);
     }
+  }
+
+  void _showPicker(context) {
+    var i = 0;
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        i = 1;
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      i = 2;
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).then((value) async {
+      if (i == 1) {
+        if (!await _itemsController.imgFromGallery(
+            context, widget.productName, widget.productCategory)) {
+          Fluttertoast.showToast(
+            msg: 'Gagal, belum ada izin',
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            fontSize: 16.0,
+          );
+        }
+      }
+      if (i == 2) {
+        if (!await _itemsController.imgFromCamera(
+            context, widget.productName, widget.productCategory)) {
+          Fluttertoast.showToast(
+            msg: 'Gagal, belum ada izin',
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            fontSize: 16.0,
+          );
+        }
+      }
+      i = 0;
+    });
   }
 
   @override

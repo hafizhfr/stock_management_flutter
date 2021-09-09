@@ -1,6 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:stock_management_flutter/routes/app_routes.dart';
 import 'package:stock_management_flutter/screens/main/frame/dashboard/add_item/add_item_screen.dart';
 import 'package:stock_management_flutter/screens/main/widget/dropdown_category.dart';
 import 'package:stock_management_flutter/screens/main/widget/item_list_widget.dart';
@@ -33,9 +34,7 @@ class _AllItemScreen extends State<AllItemScreen> {
         child: Icon(Icons.add),
         backgroundColor: Colors.redAccent,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return AddItemScreen();
-          }));
+          Get.toNamed(Routes.ADDITEMS);
         },
       ),
       body: Scaffold(
@@ -98,7 +97,7 @@ class _AllItemScreen extends State<AllItemScreen> {
                 // color: Colors.black,
                 // height: MediaQuery.of(context).size.height,
                 child:
-                ItemListWidget(searchQuery, searchByCategoryQuery, false),
+                    ItemListWidget(searchQuery, searchByCategoryQuery, false),
               ),
               // ),
             ],

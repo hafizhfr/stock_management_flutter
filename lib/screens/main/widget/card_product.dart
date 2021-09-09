@@ -34,14 +34,14 @@ class _ProductCardWidget extends State<ProductCardWidget> {
               padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               child: Row(
                 children: <Widget>[
-                  Expanded(
-                      flex: 1,
-                      child: Image.network(
-                        widget.productImg,
-                        height: 48,
-                        width: 48,
-                        fit: BoxFit.cover,
-                      )),
+                  FittedBox(
+                    child: Image.network(
+                      widget.productImg,
+                      height: 48,
+                      width: 48,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   SizedBox(
                     width: 8,
                   ),
