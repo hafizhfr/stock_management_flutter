@@ -73,6 +73,9 @@ class AuthController extends GetxController {
         Get.offAllNamed(Routes.MAIN);
       }
     });
+    if (user.photoURL != "") {
+      photoUrl.value = user.photoURL!;
+    }
     super.onInit();
   }
 
@@ -120,6 +123,7 @@ class AuthController extends GetxController {
       var url =
           await firebaseStorage.ref('uploads/${user.uid}.png').getDownloadURL();
       await user.updatePhotoURL(url);
+      print(url);
       photoUrl.value = url;
     } catch (e) {
       print(e);
