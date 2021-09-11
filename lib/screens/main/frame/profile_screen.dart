@@ -23,8 +23,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    nameController.text = _authController.user.displayName!;
-    emailController.text = _authController.user.email!;
+    nameController.text = _authController.user!.displayName!;
+    emailController.text = _authController.user!.email!;
     super.initState();
   }
 
@@ -265,12 +265,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         }
       }
-      if (i == 3 && _authController.user.photoURL != null) {
-        _authController.user.updatePhotoURL(null);
+      if (i == 3 && _authController.user!.photoURL != null) {
+        _authController.user!.updatePhotoURL(null);
         AuthController.photoUrl.value = "";
         var firebaseStorage = FirebaseStorage.instance;
         await firebaseStorage
-            .ref('uploads/${_authController.user.uid}.png')
+            .ref('uploads/${_authController.user!.uid}.png')
             .delete();
       }
       i = 0;

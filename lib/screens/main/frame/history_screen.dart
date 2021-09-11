@@ -18,7 +18,7 @@ class HistoryScreen extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseServices.getHistoryStream(),
+            stream: FirebaseServices.historyStream(),
             builder: (_, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data!.size == 0) {

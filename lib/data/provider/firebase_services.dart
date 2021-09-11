@@ -149,19 +149,19 @@ class FirebaseServices {
     //todo: add stock out
   }
 
-  static Stream<int> getStockOutStream() {
+  static Stream<int> getStockOut() {
     return stockDocument.snapshots().map((event) => event.get('stockOut'));
   }
 
-  static Stream<int> getTotalSalesStream() {
+  static Stream<int> getTotalSales() {
     return stockDocument.snapshots().map((event) => event.get('totalSales'));
   }
 
-  static Stream<int> getStockInStream() {
+  static Stream<int> getCurrentStockut() {
     return stockDocument.snapshots().map((event) => event.get('stockIn'));
   }
 
-  static Stream<QuerySnapshot> getHistoryStream() {
+  static Stream<QuerySnapshot> historyStream() {
     return historyCollection.orderBy("created", descending: true).snapshots();
   }
 }

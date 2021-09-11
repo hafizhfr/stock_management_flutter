@@ -18,7 +18,7 @@ import 'package:stock_management_flutter/util/request_permission.dart';
 class AuthController extends GetxController {
   Stream<User?> get userState => FirebaseServices.firebaseUserStream;
 
-  User get user => FirebaseServices.user;
+  User? get user => FirebaseServices.user;
   static var imagePicker = ImagePicker();
   static late Rx<File> imagePick;
   static final auth = FirebaseAuth.instance;
@@ -91,9 +91,6 @@ class AuthController extends GetxController {
         }
       }
     });
-    if (user.photoURL != "") {
-      photoUrl.value = user.photoURL!;
-    }
     super.onInit();
   }
 
@@ -141,12 +138,13 @@ class AuthController extends GetxController {
     try {
       var firebaseStorage = FirebaseStorage.instance;
       await firebaseStorage
-          .ref('uploads/${user.uid}.png')
+          .ref('uploads/${user!.uid}.png')
           .putFile(imagePick.value);
 
-      var url =
-          await firebaseStorage.ref('uploads/${user.uid}.png').getDownloadURL();
-      await user.updatePhotoURL(url);
+      var url = await firebaseStorage
+          .ref('uploads/${user!.uid}.png')
+          .getDownloadURL();
+      await user!.updatePhotoURL(url);
       print(url);
       photoUrl.value = url;
     } catch (e) {

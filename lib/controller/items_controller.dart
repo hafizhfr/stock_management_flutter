@@ -20,9 +20,9 @@ class ItemsController extends GetxController {
   var photoUrl = "".obs;
   @override
   void onInit() {
-    _totalSales.bindStream(FirebaseServices.getTotalSalesStream());
-    _stockOut.bindStream(FirebaseServices.getStockOutStream());
-    _totalStock.bindStream(FirebaseServices.getStockInStream());
+    _totalSales.bindStream(FirebaseServices.getTotalSales());
+    _stockOut.bindStream(FirebaseServices.getStockOut());
+    _totalStock.bindStream(FirebaseServices.getCurrentStockut());
     super.onInit();
   }
 
