@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management_flutter/screens/main/frame/dashboard/dashboard.dart';
-import 'package:stock_management_flutter/screens/main/frame/history.dart';
-import 'package:stock_management_flutter/screens/main/frame/profil.dart';
+import 'package:stock_management_flutter/screens/main/frame/history_screen.dart';
+import 'package:stock_management_flutter/screens/main/frame/profile_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,7 +13,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
-  final List<Widget> screens = [Dashboard(), History(), Profil()];
+  final List<Widget> screens = [
+    DashboardScreen(),
+    HistoryScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:stock_management_flutter/controller/items_controller.dart';
-import 'package:stock_management_flutter/screens/main/main_page.dart';
+import 'package:stock_management_flutter/screens/main/main_screen.dart';
 
 class CartScreen extends StatefulWidget {
   @override

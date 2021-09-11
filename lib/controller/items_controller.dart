@@ -20,9 +20,9 @@ class ItemsController extends GetxController {
   var photoUrl = "".obs;
   @override
   void onInit() {
-    _totalSales.bindStream(FirebaseServices.getTotalSales());
-    _stockOut.bindStream(FirebaseServices.getStockOut());
-    _totalStock.bindStream(FirebaseServices.getCurrentStockut());
+    _totalSales.bindStream(FirebaseServices.getTotalSalesStream());
+    _stockOut.bindStream(FirebaseServices.getStockOutStream());
+    _totalStock.bindStream(FirebaseServices.getStockInStream());
     super.onInit();
   }
 
@@ -44,7 +44,7 @@ class ItemsController extends GetxController {
   int get totalPrice => _totalPrice.value;
   set totalPrice(value) => _totalPrice.value = value;
 
-  Stream<QuerySnapshot> itemList(String search, String kategori) {
+  Stream<QuerySnapshot> getItemStreamByQuery(String search, String kategori) {
     if (kategori == 'All') {
       kategori = '';
     }
