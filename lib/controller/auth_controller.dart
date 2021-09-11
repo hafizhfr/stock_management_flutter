@@ -59,8 +59,8 @@ class AuthController extends GetxController {
       await FirebaseServices.updateName(fullName);
       await FirebaseServices.updateEmail(email);
       Fluttertoast.showToast(msg: 'Profile berhasil diupdate');
-    } catch (e) {
-      rethrow;
+    } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(msg: e.code);
     }
   }
 

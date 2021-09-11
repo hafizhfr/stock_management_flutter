@@ -26,7 +26,7 @@ class EditItemScreen extends StatefulWidget {
 }
 
 class _EditItemScreen extends State<EditItemScreen> {
-  late File _image;
+  // late File _image;
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();

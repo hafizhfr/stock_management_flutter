@@ -107,7 +107,13 @@ class _AddItemScreen extends State<AddItemScreen> {
                 SizedBox(
                   height: 15,
                 ),
-                dropDown(),
+                DropDownCategoryWidget(
+                  controller: itemCategoryController,
+                  screenType: 2,
+                  onSelected: () {
+                    setState(() {});
+                  },
+                ),
                 SizedBox(
                   height: 15,
                 ),

@@ -5,7 +5,7 @@ import 'package:stock_management_flutter/controller/items_controller.dart';
 import 'package:stock_management_flutter/routes/app_routes.dart';
 import 'package:stock_management_flutter/screens/main/widget/item_list_widget.dart';
 
-class Dashboard extends StatelessWidget {
+class DashboardScreen extends StatelessWidget {
   final AuthController _authController = Get.find();
   final ItemsController _itemsController = Get.find();
   @override

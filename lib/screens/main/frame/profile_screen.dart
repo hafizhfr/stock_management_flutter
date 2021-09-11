@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 import 'package:stock_management_flutter/common/dialog.dart';
 import 'package:stock_management_flutter/controller/auth_controller.dart';
 
-class Profil extends StatefulWidget {
-  const Profil({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  _ProfilState createState() => _ProfilState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfilState extends State<Profil> {
+class _ProfileScreenState extends State<ProfileScreen> {
   Rx<bool> isEnableTextField = false.obs;
   final nameController = new TextEditingController();
   final emailController = new TextEditingController();
@@ -174,7 +174,7 @@ class _ProfilState extends State<Profil> {
                                 emailController.text.isEmpty) {
                             } else {
                               loaderDialog(context, CircularProgressIndicator(),
-                                  "Updating Profil...");
+                                  "Menyimpan perubahan...");
                               await _authController.updateUser(
                                   nameController.text, emailController.text);
                               Navigator.pop(context);

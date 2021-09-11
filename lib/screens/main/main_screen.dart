@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stock_management_flutter/screens/main/frame/dashboard/dashboard.dart';
-import 'package:stock_management_flutter/screens/main/frame/history.dart';
-import 'package:stock_management_flutter/screens/main/frame/profil.dart';
+import 'package:stock_management_flutter/screens/main/frame/history_screen.dart';
+import 'package:stock_management_flutter/screens/main/frame/profile_screen.dart';
 
-class MainPage extends StatelessWidget {
-  MainPage({Key? key}) : super(key: key);
+class MainScreen extends StatelessWidget {
+  MainScreen({Key? key}) : super(key: key);
 
   final currentIndex = 0.obs;
 
-  final List<Widget> screens = [Dashboard(), History(), Profil()];
+  final List<Widget> screens = [
+    DashboardScreen(),
+    HistoryScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {

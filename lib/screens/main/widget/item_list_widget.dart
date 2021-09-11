@@ -24,7 +24,7 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         children: [
           StreamBuilder<QuerySnapshot>(
             //TODO: NAMBAH FIELD BARU isLowStock dan CLASS BARU BUAT NGECEK TIAP ADD, EDIT
-            stream: _itemsController.itemList(
+            stream: _itemsController.getItemStreamByQuery(
                 widget.searchQuery, widget.searchByCategoryQuery),
             builder: (_, snapshot) {
               if (snapshot.hasData) {
