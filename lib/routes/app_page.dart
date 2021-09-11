@@ -16,8 +16,7 @@ class AppPages {
     GetPage(name: Routes.INITIAL, page: () => InitialPage()),
     GetPage(name: Routes.LOGIN, page: () => LoginScreen()),
     GetPage(name: Routes.REGISTER, page: () => RegisterScreen()),
-    GetPage(
-        name: Routes.MAIN, page: () => MainScreen(), binding: ItemsBinding()),
+    GetPage(name: Routes.MAIN, page: () => MainPage(), binding: ItemsBinding()),
     GetPage(
         name: Routes.ADDITEMS,
         page: () => AddItemScreen(),
