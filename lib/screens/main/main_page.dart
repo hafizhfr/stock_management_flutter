@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:stock_management_flutter/screens/main/frame/dashboard/dashboard.dart';
 import 'package:stock_management_flutter/screens/main/frame/history.dart';
 import 'package:stock_management_flutter/screens/main/frame/profil.dart';
 
-class MainPage extends StatelessWidget {
-  MainPage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
-  final currentIndex = 0.obs;
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int currentIndex = 0;
 
   final List<Widget> screens = [Dashboard(), History(), Profil()];
 
@@ -43,13 +47,16 @@ class MainPage extends StatelessWidget {
         ],
         onTap: onTabTapped,
       ),
-      body: Obx(
-        () => screens[currentIndex.value],
+      body: IndexedStack(
+        children: screens,
+        index: currentIndex,
       ),
     );
   }
 
   void onTabTapped(int index) {
-    currentIndex.value = index;
+    setState(() {
+      currentIndex = index;
+    });
   }
 }

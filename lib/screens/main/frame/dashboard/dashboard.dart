@@ -17,9 +17,11 @@ class Dashboard extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.amber,
         elevation: 0,
-        title: Text(
-          'Welcome, ${_authController.user.displayName}',
-          style: Theme.of(context).textTheme.headline6,
+        title: Obx(
+          () => Text(
+            'Welcome, ${_authController.userName}',
+            style: Theme.of(context).textTheme.headline6,
+          ),
         ),
       ),
       backgroundColor: Colors.white,
@@ -230,10 +232,10 @@ class Dashboard extends StatelessWidget {
               IconButton(
                   icon: Icon(
                     icon,
-                    size: 64,
+                    size: MediaQuery.of(context).size.width * 0.125,
                     color: Colors.black,
                   ),
-                  iconSize: 64,
+                  iconSize: MediaQuery.of(context).size.width * 0.125,
                   alignment: Alignment.center,
                   onPressed: () {
                     Get.toNamed(routes);

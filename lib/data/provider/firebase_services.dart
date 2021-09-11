@@ -1,6 +1,7 @@
 import 'package:basic_utils/basic_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:stock_management_flutter/data/models/item_model.dart';
 
@@ -12,6 +13,7 @@ class FirebaseServices {
       firestore.collection('history');
   static DocumentReference stockDocument =
       firestore.collection('itemsTotal').doc('dashboardStatus');
+  static FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 // USER
   static Stream<User?> get firebaseUserStream => _auth.authStateChanges();
@@ -27,7 +29,7 @@ class FirebaseServices {
       password: password.trim(),
     );
     User? user = result.user;
-    user!.updateDisplayName(fullName);
+    await user!.updateDisplayName(fullName);
   }
 
   static User getUser() {
@@ -96,6 +98,8 @@ class FirebaseServices {
   static Future<void> deleteItems(String name) async {
     var item = await itemCollection.where('namaBarang', isEqualTo: name).get();
     await itemCollection.doc(item.docs.first.id).delete();
+    var url = item.docs.first.get('img');
+    await firebaseStorage.refFromURL(url).delete();
   }
 
   static Future<void> addHistory(

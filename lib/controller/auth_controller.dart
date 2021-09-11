@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,11 +23,18 @@ class AuthController extends GetxController {
   static late Rx<File> imagePick;
   static final auth = FirebaseAuth.instance;
   static var photoUrl = "".obs;
+  late StreamSubscription userStream;
+  final userName = "".obs;
 
-  Future<void> signOut() => FirebaseServices.signOut();
+  Future<void> signOut() async {
+    FirebaseServices.signOut();
+    Get.offAllNamed(Routes.LOGIN);
+  }
+
   Future<void> signIn(String email, String password) async {
     try {
       await FirebaseServices.signIn(email, password);
+      Get.offAllNamed(Routes.MAIN);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Fluttertoast.showToast(msg: 'Akun tidak ditemukan.');
@@ -41,6 +49,8 @@ class AuthController extends GetxController {
     try {
       await FirebaseServices.signUp(fullName, email, password);
       Fluttertoast.showToast(msg: 'Berhasil membuat akun baru.');
+      userName.value = fullName;
+      Get.offAllNamed(Routes.MAIN);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Fluttertoast.showToast(msg: 'Password terlalu lemah.');
@@ -49,6 +59,7 @@ class AuthController extends GetxController {
       } else {
         Fluttertoast.showToast(msg: e.message!);
       }
+      Get.back();
     } catch (e) {
       rethrow;
     }
@@ -59,6 +70,7 @@ class AuthController extends GetxController {
       await FirebaseServices.updateName(fullName);
       await FirebaseServices.updateEmail(email);
       Fluttertoast.showToast(msg: 'Profile berhasil diupdate');
+      userName.value = fullName;
     } catch (e) {
       rethrow;
     }
@@ -66,14 +78,26 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
-    userState.listen((event) {
+    userStream = userState.listen((event) {
       if (event == null) {
-        Get.offAllNamed(Routes.LOGIN);
+        photoUrl.value = "";
+        userName.value = "";
       } else {
-        Get.offAllNamed(Routes.MAIN);
+        if (event.photoURL != null) {
+          photoUrl.value = event.photoURL!;
+        }
+        if (event.displayName != null) {
+          userName.value = event.displayName!;
+        }
       }
     });
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    userStream.cancel();
+    super.onClose();
   }
 
   Future<bool> imgFromCamera(BuildContext context) async {
