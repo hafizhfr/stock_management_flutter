@@ -154,10 +154,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             hintText: '$hint',
             hintStyle: Theme.of(context).textTheme.body1,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: a),
+              borderSide: BorderSide(color: Colors.black),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: a),
+              borderSide: BorderSide(color: Colors.amber),
             ),
           ),
           style: TextStyle(fontSize: 15, color: Colors.black),

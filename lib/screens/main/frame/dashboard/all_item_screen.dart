@@ -28,7 +28,7 @@ class _AllItemScreen extends State<AllItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Item'),
+        title: Text('All Items'),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

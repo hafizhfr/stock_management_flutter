@@ -212,7 +212,7 @@ class _CartScreenState extends State<CartScreen> {
                     child: Text(
                       'CONFIRM',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),

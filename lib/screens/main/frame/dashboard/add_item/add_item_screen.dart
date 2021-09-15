@@ -179,7 +179,7 @@ class _AddItemScreen extends State<AddItemScreen> {
                               );
                             } else {
                               Fluttertoast.showToast(
-                                msg: 'image cannot be empty',
+                                msg: 'Upload foto barang terlebih dahulu.',
                               );
                             }
 

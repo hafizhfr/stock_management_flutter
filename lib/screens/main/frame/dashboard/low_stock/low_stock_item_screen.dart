@@ -28,7 +28,7 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Low Stock Item'),
+        title: Text('Low Stock Items'),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

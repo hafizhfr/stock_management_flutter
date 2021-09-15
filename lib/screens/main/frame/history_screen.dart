@@ -24,7 +24,7 @@ class HistoryScreen extends StatelessWidget {
                 if (snapshot.data!.size == 0) {
                   return Center(
                       child: Text(
-                    'Data isEmpty',
+                    'Riwayat kosong.',
                     style: TextStyle(
                       fontSize: 20.0,
                       fontFamily: fontFamily,
