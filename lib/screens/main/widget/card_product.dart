@@ -46,24 +46,20 @@ class _ProductCardWidget extends State<ProductCardWidget> {
                     width: 8,
                   ),
                   Expanded(
-                    // flex: 4,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          // "Product Name",
                           widget.productName,
                           style: Theme.of(context).textTheme.bodyText2,
                           textAlign: TextAlign.start,
                         ),
                         Text(
-                          // "Price",
                           'Rp ' + widget.productPrice.toString(),
                           style: Theme.of(context).textTheme.bodyText2,
                           textAlign: TextAlign.start,
                         ),
                         Text(
-                          // "Stock",
                           'Stok: ' + widget.productStock.toString(),
                           style: Theme.of(context).textTheme.bodyText2,
                           textAlign: TextAlign.start,

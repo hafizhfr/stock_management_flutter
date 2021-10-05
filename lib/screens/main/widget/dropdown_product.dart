@@ -38,45 +38,12 @@ class _DropDownProductWidget extends State<DropDownProductWidget> {
             isDense: true,
             isExpanded: true,
             items:
-            kategoriBarang.map<DropdownMenuItem<String>>((String kategori) {
+                kategoriBarang.map<DropdownMenuItem<String>>((String kategori) {
               return DropdownMenuItem(
                 child: Text(kategori),
                 value: kategori,
               );
             }).toList(),
-            // DropdownMenuItem(
-            //   child: Text("Makanan"),
-            //   value: "Makanan",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Alat Tulis"),
-            //   value: "Alat Tulis",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Pakaian"),
-            //   value: "Pakaian",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Minuman"),
-            //   value: "Minuman",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Obat-obatan"),
-            //   value: "Obat-obatan",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Peralatan Mandi"),
-            //   value: "Peralatan Mandi",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Keperluan Bayi"),
-            //   value: "Keperluan Bayi",
-            // ),
-            // DropdownMenuItem(
-            //   child: Text("Lain-lain"),
-            //   value: "Dan lain-lain",
-            // )
-
             onChanged: (newValue) {
               setState(() {
                 _dropDownValue = newValue!;
@@ -88,10 +55,6 @@ class _DropDownProductWidget extends State<DropDownProductWidget> {
       ),
     );
   }
-
-// getProductName() async {
-//   String currId = await auth
-// }
 }
 
 class ItemProductController {

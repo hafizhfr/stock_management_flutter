@@ -110,52 +110,6 @@ class _CartScreenState extends State<CartScreen> {
                   }
                 },
               ),
-              // child: ListView.builder(
-              //   shrinkWrap: true,
-              //   itemCount: items.length,
-              //   itemBuilder: (context, index) {
-              //     return Column(
-              //       children: [
-              //         Row(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           crossAxisAlignment: CrossAxisAlignment.center,
-              //           children: <Widget>[
-              //             Expanded(
-              //               child: Text(
-              //                 "name",
-              //                 style: Theme.of(context).textTheme.bodyText1,
-              //                 textAlign: TextAlign.start,
-              //               ),
-              //             ),
-              //             Expanded(
-              //                 child: Text(
-              //               "qty",
-              //               style: Theme.of(context).textTheme.bodyText1,
-              //               textAlign: TextAlign.center,
-              //             )),
-              //             Expanded(
-              //                 child: Text(
-              //               "Rp. amount",
-              //               style: Theme.of(context).textTheme.bodyText1,
-              //               textAlign: TextAlign.end,
-              //             )),
-              //           ],
-              //         ),
-              //         SizedBox(
-              //           height: 16,
-              //         ),
-              //         Container(
-              //           width: size.width,
-              //           height: 1,
-              //           color: Colors.amber,
-              //         ),
-              //         SizedBox(
-              //           height: 16,
-              //         )
-              //       ],
-              //     );
-              //   },
-              // ),
             ),
             SizedBox(
               height: 8,

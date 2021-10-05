@@ -28,11 +28,6 @@ class _AddItemScreen extends State<AddItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference itemCollection = firestore.collection('items');
-
-    // CollectionReference historyCollection = firestore.collection('history');
-
     bool pop = true;
 
     var size = MediaQuery.of(context).size;

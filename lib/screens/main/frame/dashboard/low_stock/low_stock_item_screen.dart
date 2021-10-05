@@ -60,11 +60,7 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0)),
-                              prefixIcon: Icon(Icons.search
-                                  //   icon: Icon(
-                                  // Icons.search,
-                                  // color: Colors.black,
-                                  ),
+                              prefixIcon: Icon(Icons.search),
                               hintText: "Search...",
                             ))),
                     SizedBox(
@@ -101,5 +97,4 @@ class _LowStockItemScreen extends State<LowStockItemScreen> {
           });
         },
       );
-// Widget productCard() => ProductCardWidget();
 }

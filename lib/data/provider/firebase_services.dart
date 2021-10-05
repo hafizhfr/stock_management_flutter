@@ -146,7 +146,6 @@ class FirebaseServices {
     newTotal += sales;
 
     stockDocument.update({'stockOut': newTotal});
-    //todo: add stock out
   }
 
   static Stream<int> getStockOut() {

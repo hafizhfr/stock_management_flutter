@@ -26,7 +26,6 @@ class EditItemScreen extends StatefulWidget {
 }
 
 class _EditItemScreen extends State<EditItemScreen> {
-  // late File _image;
   final itemNameController = TextEditingController();
   final itemCountController = TextEditingController();
   final itemPriceController = TextEditingController();
@@ -59,16 +58,12 @@ class _EditItemScreen extends State<EditItemScreen> {
       appBar: AppBar(
         title: Text("Edit Item"),
       ),
-      // resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-          // ClampingScrollPhysics(parent: NeverScrollableScrollPhysics()),
-          // child: Padding(
-          //   padding: const EdgeInsets.all(32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,

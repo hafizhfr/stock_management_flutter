@@ -153,7 +153,6 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      // mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Expanded(
                           child: quickActionCard(
@@ -221,34 +220,34 @@ class DashboardScreen extends StatelessWidget {
   Widget quickActionCard(BuildContext context, String routes, Color color,
       String label, IconData icon) {
     return Card(
-        color: color,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-          alignment: Alignment.center,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              IconButton(
-                  icon: Icon(
-                    icon,
-                    size: MediaQuery.of(context).size.width * 0.125,
-                    color: Colors.black,
-                  ),
-                  iconSize: MediaQuery.of(context).size.width * 0.125,
-                  alignment: Alignment.center,
-                  onPressed: () {
-                    Get.toNamed(routes);
-                  }),
-              FittedBox(
-                child: Text(
-                  label,
-                  style: Theme.of(context).textTheme.subtitle1,
+      color: color,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        alignment: Alignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+                icon: Icon(
+                  icon,
+                  size: MediaQuery.of(context).size.width * 0.125,
+                  color: Colors.black,
                 ),
-              )
-            ],
-          ),
-        ));
+                iconSize: MediaQuery.of(context).size.width * 0.125,
+                alignment: Alignment.center,
+                onPressed: () {
+                  Get.toNamed(routes);
+                }),
+            FittedBox(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
-// Widget productCard() => ProductCardWidget();ddddddddddddd
 }

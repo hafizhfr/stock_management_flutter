@@ -23,7 +23,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
         shrinkWrap: true,
         children: [
           StreamBuilder<QuerySnapshot>(
-            //TODO: NAMBAH FIELD BARU isLowStock dan CLASS BARU BUAT NGECEK TIAP ADD, EDIT
             stream: _itemsController.getItemStreamByQuery(
                 widget.searchQuery, widget.searchByCategoryQuery),
             builder: (_, snapshot) {
@@ -69,7 +68,6 @@ class _ItemListWidgetState extends State<ItemListWidget> {
           ),
         ],
       ),
-      // ),
     );
   }
 }

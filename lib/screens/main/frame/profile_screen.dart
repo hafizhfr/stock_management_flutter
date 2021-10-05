@@ -22,7 +22,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     nameController.text = _authController.user!.displayName!;
     emailController.text = _authController.user!.email!;
     super.initState();
@@ -55,25 +54,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Obx(
                           () => CircleAvatar(
-                              radius: 70,
-                              backgroundImage: NetworkImage(
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8zpfdzQKEDKixZ57SDbZz-BY-Wj94ZcUo0w&usqp=CAU'),
-                              child: Visibility(
-                                  visible: AuthController.photoUrl.value != "",
-                                  child: FittedBox(
-                                    fit: BoxFit.cover,
-                                    child: CircleAvatar(
-                                      radius: 70,
-                                      backgroundImage: NetworkImage(
-                                          AuthController.photoUrl.value),
-                                    ),
-                                  ))),
+                            radius: 70,
+                            backgroundImage: NetworkImage(
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8zpfdzQKEDKixZ57SDbZz-BY-Wj94ZcUo0w&usqp=CAU'),
+                            child: Visibility(
+                              visible: AuthController.photoUrl.value != "",
+                              child: FittedBox(
+                                fit: BoxFit.cover,
+                                child: CircleAvatar(
+                                  radius: 70,
+                                  backgroundImage: NetworkImage(
+                                      AuthController.photoUrl.value),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                         Positioned(
                             bottom: 5,
                             right: 5,
                             child: InkWell(
-                                // borderRadius: BorderRadius.all(Radius.circular(60)),
                                 onTap: () {
                                   isEnableTextField.value =
                                       !isEnableTextField.value;
@@ -139,7 +139,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Colors.black,
                               ),
                               hintText: "Full Name",
-                              // errorText: _validate ? 'Password Can\'t Be Empty' : null,
                             ),
                             style: Theme.of(context).textTheme.headline6),
                       ),
@@ -156,7 +155,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Colors.black,
                               ),
                               hintText: "xxxxx@mail.com",
-                              // errorText: _validate ? 'Password Can\'t Be Empty' : null,
                             ),
                             style: Theme.of(context).textTheme.headline6),
                       ),
@@ -204,7 +202,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
-      // ),
     );
   }
 
